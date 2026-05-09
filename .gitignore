@@ -1,0 +1,44 @@
+# Xcode / iOS
+build/
+DerivedData/
+*.xcodeproj/
+!project.yml
+*.xcworkspace/
+xcuserdata/
+*.xcuserdata
+*.xcuserstate
+*.xcscmblueprint
+*.swp
+*.lock
+.build/
+Packages/
+Package.pins
+Package.resolved
+.swiftpm/
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.app
+Payload/
+.DS_Store
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini

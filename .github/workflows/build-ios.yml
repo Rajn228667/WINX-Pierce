@@ -1,0 +1,94 @@
+name: Build iOS IPA (unsigned, sideloadable)
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build unsigned IPA
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s "/Applications/Xcode_15.4.app"
+
+      - name: Print toolchain
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build (Release, unsigned)
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project WINXPierce.xcodeproj \
+            -scheme WINXPierce \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            DEVELOPMENT_TEAM="" \
+            ONLY_ACTIVE_ARCH=NO \
+            EXCLUDED_ARCHS=x86_64 \
+            clean build | tee build.log | xcpretty || (tail -200 build.log && exit 1)
+
+      - name: Locate WINXPierce.app
+        id: locate
+        run: |
+          APP_PATH=$(find build/Build/Products/Release-iphoneos -maxdepth 2 -name "*.app" -type d | head -n1)
+          echo "App path: $APP_PATH"
+          if [ -z "$APP_PATH" ]; then
+            echo "Could not find built .app — listing tree:"
+            find build/Build/Products -maxdepth 4 || true
+            exit 1
+          fi
+          echo "app_path=$APP_PATH" >> $GITHUB_OUTPUT
+
+      - name: Package unsigned IPA
+        run: |
+          APP_PATH="${{ steps.locate.outputs.app_path }}"
+          mkdir -p Payload
+          cp -R "$APP_PATH" Payload/
+          # Strip any inherited code-signing artefacts so AltStore / Sideloadly
+          # / TrollStore won't refuse the bundle.
+          find Payload -name "_CodeSignature" -type d -exec rm -rf {} +
+          find Payload -name "embedded.mobileprovision" -delete
+          zip -qry "WINXPierce-unsigned.ipa" Payload
+          ls -la
+          unzip -l "WINXPierce-unsigned.ipa" | head -40
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WINXPierce-unsigned-ipa
+          path: WINXPierce-unsigned.ipa
+          if-no-files-found: error
+
+      - name: Upload to GitHub Release (on tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: WINXPierce-unsigned.ipa
+          draft: false
+          prerelease: false
+          generate_release_notes: true

@@ -1,0 +1,117 @@
+name: WINXPierce
+options:
+  bundleIdPrefix: com.pierceindustries
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  developmentLanguage: ru
+  groupSortPosition: top
+  generateEmptyDirectories: true
+  xcodeVersion: "15.0"
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    ENABLE_BITCODE: NO
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: ""
+    CODE_SIGNING_REQUIRED: NO
+    CODE_SIGNING_ALLOWED: NO
+    PROVISIONING_PROFILE_SPECIFIER: ""
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+
+targets:
+  WINXPierce:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Sources
+        excludes:
+          - "**/.DS_Store"
+    resources:
+      - path: Sources/Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.pierceindustries.winx
+        PRODUCT_NAME: "WINX × Pierce"
+        DISPLAY_NAME: "WINX × Pierce"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        INFOPLIST_KEY_UIRequiresFullScreen: NO
+        INFOPLIST_KEY_UIStatusBarStyle: UIStatusBarStyleDefault
+        INFOPLIST_KEY_UIUserInterfaceStyle: ""
+        INFOPLIST_KEY_CFBundleDisplayName: "WINX × Pierce"
+        INFOPLIST_KEY_CFBundleLocalizations: "ru kk en"
+        INFOPLIST_KEY_NSCameraUsageDescription: "WINX × Pierce использует камеру для распознавания объектов, текста, дорожных ситуаций и описания окружения."
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: "Микрофон необходим для голосового AI-помощника, голосового управления и записи голосовых сообщений."
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "Распознавание речи нужно, чтобы понимать голосовые команды и переводить речь в текст."
+        INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "Геолокация нужна для голосовой навигации, поиска ближайших аптек, больниц и службы экстренной помощи."
+        INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription: "Геолокация в фоне используется для безопасного маршрута и live-tracking при экстренном режиме."
+        INFOPLIST_KEY_NSContactsUsageDescription: "Контакты нужны, чтобы вы могли быстро отправить голосовое сообщение или SOS близкому."
+        INFOPLIST_KEY_NSHomeKitUsageDescription: "HomeKit используется для голосового управления светом и сценами умного дома."
+        INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription: "Сохраняем сделанные фотографии и сканы в вашу галерею."
+        INFOPLIST_KEY_NSPhotoLibraryUsageDescription: "Доступ к галерее нужен для распознавания текста и объектов на сохранённых фото."
+        INFOPLIST_KEY_NSMotionUsageDescription: "Датчики движения помогают определять опасные движения и улучшать описание сцены."
+        INFOPLIST_KEY_NSFaceIDUsageDescription: "Face ID используется для быстрой блокировки экстренного режима."
+        INFOPLIST_KEY_NSAppTransportSecurity: ""
+        INFOPLIST_KEY_NSUserActivityTypes: ""
+        INFOPLIST_KEY_LSApplicationQueriesSchemes: "whatsapp telegram tg sms tel mailto maps"
+        INFOPLIST_KEY_UIBackgroundModes: "audio location voip"
+        INFOPLIST_KEY_UIRequiredDeviceCapabilities: "armv7"
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        INFOPLIST_KEY_INSendMessageIntentEnabled: YES
+        INFOPLIST_KEY_NSSupportsLiveActivities: YES
+        INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates: YES
+        INFOPLIST_KEY_UIFileSharingEnabled: YES
+        INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace: YES
+        ENABLE_PREVIEWS: YES
+    info:
+      path: Sources/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: "WINX × Pierce"
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        CFBundleLocalizations:
+          - ru
+          - kk
+          - en
+        LSApplicationQueriesSchemes:
+          - whatsapp
+          - telegram
+          - tg
+          - sms
+          - tel
+          - mailto
+          - maps
+          - http
+          - https
+        UIBackgroundModes:
+          - audio
+          - location
+          - voip
+        NSSupportsLiveActivities: true
+        UIApplicationSupportsIndirectInputEvents: true
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIRequiresFullScreen: false
+        UILaunchScreen:
+          UIColorName: ""
+          UIImageName: ""
+        ITSAppUsesNonExemptEncryption: false
