@@ -11,7 +11,9 @@ struct WINXPierceApp: App {
     @StateObject private var emergencyContacts = EmergencyContactsStore.shared
 
     init() {
-        AppBootstrap.configureOnLaunch()
+        MainActor.assumeIsolated {
+            AppBootstrap.configureOnLaunch()
+        }
     }
 
     var body: some Scene {
@@ -32,6 +34,7 @@ struct WINXPierceApp: App {
 }
 
 enum AppBootstrap {
+    @MainActor
     static func configureOnLaunch() {
         // Activate audio session in playback+record mode for TTS + STT coexistence.
         AudioSessionManager.shared.activatePlayAndRecord()

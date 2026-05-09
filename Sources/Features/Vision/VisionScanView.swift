@@ -86,7 +86,15 @@ struct VisionScanView: View {
             Image(systemName: system)
                 .font(.system(size: 22, weight: .bold))
                 .frame(width: 56, height: 56)
-                .background(Circle().fill(on ? Theme.brandRed : .ultraThinMaterial))
+                .background(
+                    ZStack {
+                        if on {
+                            Circle().fill(Theme.brandRed)
+                        } else {
+                            Circle().fill(.ultraThinMaterial)
+                        }
+                    }
+                )
                 .foregroundStyle(on ? Color.white : Theme.primaryText)
         }
     }
