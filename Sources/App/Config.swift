@@ -34,22 +34,46 @@ enum Config {
 
     /// Preferred Apple voice identifiers (Premium where available).
     /// The app will gracefully fall back to standard voices if Premium is not installed.
+    /// Female voices are listed first; male voices in the *_male arrays.
     static let preferredVoicesRu: [String] = [
         "com.apple.voice.premium.ru-RU.Milena",
         "com.apple.voice.enhanced.ru-RU.Milena",
         "com.apple.voice.compact.ru-RU.Milena",
         "com.apple.ttsbundle.Milena-premium",
-        "com.apple.ttsbundle.Milena-compact"
+        "com.apple.ttsbundle.Milena-compact",
+        "com.apple.voice.compact.ru-RU.Katya",
+        "com.apple.voice.enhanced.ru-RU.Katya"
+    ]
+    static let preferredVoicesRuMale: [String] = [
+        "com.apple.voice.premium.ru-RU.Yuri",
+        "com.apple.voice.enhanced.ru-RU.Yuri",
+        "com.apple.voice.compact.ru-RU.Yuri",
+        "com.apple.ttsbundle.Yuri-premium",
+        "com.apple.ttsbundle.Yuri-compact"
     ]
     static let preferredVoicesEn: [String] = [
         "com.apple.voice.premium.en-US.Zoe",
-        "com.apple.voice.premium.en-US.Evan",
+        "com.apple.voice.premium.en-US.Ava",
         "com.apple.voice.enhanced.en-US.Samantha",
-        "com.apple.voice.compact.en-US.Samantha"
+        "com.apple.voice.compact.en-US.Samantha",
+        "com.apple.voice.enhanced.en-GB.Serena",
+        "com.apple.voice.compact.en-GB.Serena"
+    ]
+    static let preferredVoicesEnMale: [String] = [
+        "com.apple.voice.premium.en-US.Evan",
+        "com.apple.voice.premium.en-US.Tom",
+        "com.apple.voice.enhanced.en-US.Aaron",
+        "com.apple.voice.compact.en-US.Aaron",
+        "com.apple.voice.enhanced.en-GB.Daniel",
+        "com.apple.voice.compact.en-GB.Daniel"
     ]
     static let preferredVoicesKk: [String] = [
         "com.apple.voice.compact.kk-KZ.Aigul",
         "com.apple.voice.compact.kk-KZ.Madina"
+    ]
+    static let preferredVoicesKkMale: [String] = [
+        "com.apple.voice.compact.kk-KZ.Daulet",
+        "com.apple.voice.compact.kk-KZ.Bauyrzhan"
     ]
 
     /// Companion AI persona — system prompt (RU). Used as default seed.

@@ -24,6 +24,8 @@ final class SettingsStore: ObservableObject {
         static let voiceControlEnabled = "winx.voiceControlEnabled"
         static let dangerVibrations = "winx.dangerVibrations"
         static let preferredCompanionModel = "winx.preferredCompanionModel"
+        static let voiceGender = "winx.voiceGender"
+        static let voiceIdentifier = "winx.voiceIdentifier"
     }
 
     private let defaults = UserDefaults.standard
@@ -94,6 +96,17 @@ final class SettingsStore: ObservableObject {
         didSet { defaults.set(preferredCompanionModel, forKey: Keys.preferredCompanionModel) }
     }
 
+    @Published var voiceGenderRaw: String {
+        didSet { defaults.set(voiceGenderRaw, forKey: Keys.voiceGender) }
+    }
+
+    /// Optional pinned voice identifier (e.g. "com.apple.voice.premium.ru-RU.Milena").
+    /// Empty string means "let the synthesizer pick the best voice for the
+    /// current language + gender".
+    @Published var voiceIdentifier: String {
+        didSet { defaults.set(voiceIdentifier, forKey: Keys.voiceIdentifier) }
+    }
+
     // MARK: - Init
 
     private init() {
@@ -112,6 +125,13 @@ final class SettingsStore: ObservableObject {
         self.voiceControlEnabled = defaults.object(forKey: Keys.voiceControlEnabled) as? Bool ?? true
         self.dangerVibrations = defaults.object(forKey: Keys.dangerVibrations) as? Bool ?? true
         self.preferredCompanionModel = defaults.string(forKey: Keys.preferredCompanionModel) ?? Config.chatModel
+        self.voiceGenderRaw = defaults.string(forKey: Keys.voiceGender) ?? VoiceGender.female.rawValue
+        self.voiceIdentifier = defaults.string(forKey: Keys.voiceIdentifier) ?? ""
+    }
+
+    var voiceGender: VoiceGender {
+        get { VoiceGender(rawValue: voiceGenderRaw) ?? .female }
+        set { voiceGenderRaw = newValue.rawValue }
     }
 
     // MARK: - Derived
@@ -149,11 +169,17 @@ final class SettingsStore: ObservableObject {
             Keys.onboarded, Keys.textScale, Keys.boldText, Keys.highContrast,
             Keys.colorScheme, Keys.colorblindMode, Keys.blueLightFilter, Keys.language,
             Keys.voiceRate, Keys.voicePitch, Keys.voiceVolume, Keys.hapticsEnabled,
-            Keys.voiceControlEnabled, Keys.dangerVibrations, Keys.preferredCompanionModel
+            Keys.voiceControlEnabled, Keys.dangerVibrations, Keys.preferredCompanionModel,
+            Keys.voiceGender, Keys.voiceIdentifier
         ] {
             defaults.removeObject(forKey: key)
         }
     }
+}
+
+enum VoiceGender: String, CaseIterable, Identifiable {
+    case female, male
+    var id: String { rawValue }
 }
 
 private extension Double {

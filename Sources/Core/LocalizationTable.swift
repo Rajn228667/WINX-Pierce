@@ -168,6 +168,56 @@ enum LocalKey: String, CaseIterable {
     case big_mode_on
     case big_mode_off
 
+    // v1.4 Accessibility deep dive
+    case acc_text_section
+    case acc_text_size
+    case acc_text_preview_short
+    case acc_bold
+    case acc_high_contrast
+    case acc_vision_section
+    case acc_warm_filter
+    case acc_warm_off
+    case acc_warm_low
+    case acc_warm_high
+    case acc_color_scheme
+    case acc_scheme_system
+    case acc_scheme_light
+    case acc_scheme_dark
+    case acc_colorblind
+    case acc_colorblind_none
+    case acc_colorblind_protanopia
+    case acc_colorblind_deuteranopia
+    case acc_colorblind_tritanopia
+    case acc_colorblind_monochrome
+    case acc_voice_section
+    case acc_voice_gender
+    case acc_voice_female
+    case acc_voice_male
+    case acc_voice_picker
+    case acc_voice_auto
+    case acc_voice_rate
+    case acc_voice_pitch
+    case acc_voice_volume
+    case acc_voice_preview
+    case acc_voice_preview_text
+    case acc_control_section
+    case acc_voice_control
+    case acc_haptics
+    case acc_danger_haptics
+    case acc_language_section
+    case acc_language_picker
+    case acc_ai_section
+    case acc_ai_model
+    case acc_ai_url
+    case acc_quality_premium
+    case acc_quality_enhanced
+    case acc_quality_compact
+
+    // First-launch language selector
+    case lang_choose_title
+    case lang_choose_subtitle
+    case lang_continue
+
     // Section headers
     case section_eyes
     case section_voice
@@ -468,7 +518,55 @@ extension LocalizationTable {
         .big_mode_title: "Огромный режим",
         .big_mode_hint: "Очень крупные кнопки и подписи. Минимум деталей.",
         .big_mode_on: "Огромный режим включён.",
-        .big_mode_off: "Огромный режим выключен."
+        .big_mode_off: "Огромный режим выключен.",
+
+        .acc_text_section: "Текст",
+        .acc_text_size: "Размер текста",
+        .acc_text_preview_short: "Так выглядят меню и кнопки",
+        .acc_bold: "Жирный шрифт",
+        .acc_high_contrast: "Высокий контраст",
+        .acc_vision_section: "Зрение",
+        .acc_warm_filter: "Тёплый фильтр (бережёт глаза)",
+        .acc_warm_off: "Выкл",
+        .acc_warm_low: "Слабый",
+        .acc_warm_high: "Сильный",
+        .acc_color_scheme: "Цветовая схема",
+        .acc_scheme_system: "Системная",
+        .acc_scheme_light: "Светлая",
+        .acc_scheme_dark: "Тёмная",
+        .acc_colorblind: "Дальтонизм",
+        .acc_colorblind_none: "Без коррекции",
+        .acc_colorblind_protanopia: "Протанопия (красно-зелёный)",
+        .acc_colorblind_deuteranopia: "Дейтеранопия (зелёный)",
+        .acc_colorblind_tritanopia: "Тританопия (сине-жёлтый)",
+        .acc_colorblind_monochrome: "Монохром",
+        .acc_voice_section: "Голос",
+        .acc_voice_gender: "Голос помощника",
+        .acc_voice_female: "Женский",
+        .acc_voice_male: "Мужской",
+        .acc_voice_picker: "Выбор голоса",
+        .acc_voice_auto: "Авто (лучший доступный)",
+        .acc_voice_rate: "Скорость",
+        .acc_voice_pitch: "Тон",
+        .acc_voice_volume: "Громкость",
+        .acc_voice_preview: "Прослушать пример",
+        .acc_voice_preview_text: "Это пример того, как я звучу. Я говорю с тобой ровно так, как ты слышишь сейчас.",
+        .acc_control_section: "Управление",
+        .acc_voice_control: "Голосовое управление",
+        .acc_haptics: "Тактильный отклик",
+        .acc_danger_haptics: "Вибрация при опасности",
+        .acc_language_section: "Язык",
+        .acc_language_picker: "Язык интерфейса",
+        .acc_ai_section: "ИИ",
+        .acc_ai_model: "Модель Ollama",
+        .acc_ai_url: "URL туннеля Ollama",
+        .acc_quality_premium: "Премиум",
+        .acc_quality_enhanced: "Улучшенный",
+        .acc_quality_compact: "Стандартный",
+
+        .lang_choose_title: "Выберите язык",
+        .lang_choose_subtitle: "Эту настройку можно изменить позже",
+        .lang_continue: "Продолжить"
     ]
 
     static let kk: [LocalKey: String] = [
@@ -681,7 +779,55 @@ extension LocalizationTable {
         .big_mode_title: "Алып режим",
         .big_mode_hint: "Өте ірі батырмалар мен жазулар. Аз бөлшек.",
         .big_mode_on: "Алып режим қосылды.",
-        .big_mode_off: "Алып режим өшірілді."
+        .big_mode_off: "Алып режим өшірілді.",
+
+        .acc_text_section: "Мәтін",
+        .acc_text_size: "Мәтін өлшемі",
+        .acc_text_preview_short: "Мәзірлер мен батырмалар осылай көрінеді",
+        .acc_bold: "Қалың қаріп",
+        .acc_high_contrast: "Жоғары контраст",
+        .acc_vision_section: "Көру",
+        .acc_warm_filter: "Жылы сүзгі (көзге жайлы)",
+        .acc_warm_off: "Өшірілді",
+        .acc_warm_low: "Әлсіз",
+        .acc_warm_high: "Күшті",
+        .acc_color_scheme: "Түс схемасы",
+        .acc_scheme_system: "Жүйелік",
+        .acc_scheme_light: "Жарық",
+        .acc_scheme_dark: "Қараңғы",
+        .acc_colorblind: "Дальтонизм",
+        .acc_colorblind_none: "Түзетусіз",
+        .acc_colorblind_protanopia: "Протанопия (қызыл-жасыл)",
+        .acc_colorblind_deuteranopia: "Дейтеранопия (жасыл)",
+        .acc_colorblind_tritanopia: "Тританопия (көк-сары)",
+        .acc_colorblind_monochrome: "Монохром",
+        .acc_voice_section: "Дауыс",
+        .acc_voice_gender: "Көмекшінің дауысы",
+        .acc_voice_female: "Әйел",
+        .acc_voice_male: "Ер",
+        .acc_voice_picker: "Дауысты таңдау",
+        .acc_voice_auto: "Авто (ең жақсы)",
+        .acc_voice_rate: "Жылдамдық",
+        .acc_voice_pitch: "Тон",
+        .acc_voice_volume: "Дауыс",
+        .acc_voice_preview: "Үлгіні тыңдау",
+        .acc_voice_preview_text: "Менің қалай естілетінімнің үлгісі. Мен сенімен дәл осылай сөйлесемін.",
+        .acc_control_section: "Басқару",
+        .acc_voice_control: "Дауыстық басқару",
+        .acc_haptics: "Тактильді жауап",
+        .acc_danger_haptics: "Қауіп кезінде діріл",
+        .acc_language_section: "Тіл",
+        .acc_language_picker: "Интерфейс тілі",
+        .acc_ai_section: "ИИ",
+        .acc_ai_model: "Ollama моделі",
+        .acc_ai_url: "Ollama туннель URL",
+        .acc_quality_premium: "Премиум",
+        .acc_quality_enhanced: "Жақсартылған",
+        .acc_quality_compact: "Стандарт",
+
+        .lang_choose_title: "Тілді таңдаңыз",
+        .lang_choose_subtitle: "Бұл параметрді кейін өзгертуге болады",
+        .lang_continue: "Жалғастыру"
     ]
 
     static let en: [LocalKey: String] = [
@@ -894,6 +1040,54 @@ extension LocalizationTable {
         .big_mode_title: "Huge mode",
         .big_mode_hint: "Extra-large buttons and labels. Minimum detail.",
         .big_mode_on: "Huge mode enabled.",
-        .big_mode_off: "Huge mode disabled."
+        .big_mode_off: "Huge mode disabled.",
+
+        .acc_text_section: "Text",
+        .acc_text_size: "Text size",
+        .acc_text_preview_short: "Menus and buttons look like this",
+        .acc_bold: "Bold text",
+        .acc_high_contrast: "High contrast",
+        .acc_vision_section: "Vision",
+        .acc_warm_filter: "Warm filter (eye comfort)",
+        .acc_warm_off: "Off",
+        .acc_warm_low: "Low",
+        .acc_warm_high: "High",
+        .acc_color_scheme: "Color scheme",
+        .acc_scheme_system: "System",
+        .acc_scheme_light: "Light",
+        .acc_scheme_dark: "Dark",
+        .acc_colorblind: "Color blindness",
+        .acc_colorblind_none: "No correction",
+        .acc_colorblind_protanopia: "Protanopia (red-green)",
+        .acc_colorblind_deuteranopia: "Deuteranopia (green)",
+        .acc_colorblind_tritanopia: "Tritanopia (blue-yellow)",
+        .acc_colorblind_monochrome: "Monochrome",
+        .acc_voice_section: "Voice",
+        .acc_voice_gender: "Assistant voice",
+        .acc_voice_female: "Female",
+        .acc_voice_male: "Male",
+        .acc_voice_picker: "Choose a voice",
+        .acc_voice_auto: "Auto (best available)",
+        .acc_voice_rate: "Speed",
+        .acc_voice_pitch: "Pitch",
+        .acc_voice_volume: "Volume",
+        .acc_voice_preview: "Hear a sample",
+        .acc_voice_preview_text: "This is what I sound like. I will speak to you exactly as you hear me now.",
+        .acc_control_section: "Control",
+        .acc_voice_control: "Voice control",
+        .acc_haptics: "Haptic feedback",
+        .acc_danger_haptics: "Vibrate on danger",
+        .acc_language_section: "Language",
+        .acc_language_picker: "Interface language",
+        .acc_ai_section: "AI",
+        .acc_ai_model: "Ollama model",
+        .acc_ai_url: "Ollama tunnel URL",
+        .acc_quality_premium: "Premium",
+        .acc_quality_enhanced: "Enhanced",
+        .acc_quality_compact: "Standard",
+
+        .lang_choose_title: "Choose your language",
+        .lang_choose_subtitle: "You can change this later in Settings",
+        .lang_continue: "Continue"
     ]
 }
