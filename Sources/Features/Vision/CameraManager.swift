@@ -21,6 +21,12 @@ final class CameraManager: NSObject, ObservableObject {
     private var device: AVCaptureDevice?
     private weak var sampleDelegate: AVCaptureVideoDataOutputSampleBufferDelegate?
 
+    /// Cached most-recent frame so a one-shot snapshot can be taken on demand
+    /// even if no external delegate is attached. Accessed from the camera queue
+    /// (nonisolated) so they live outside the main actor.
+    nonisolated(unsafe) private var latestPixelBuffer: CVPixelBuffer?
+    nonisolated private let pixelBufferLock = NSLock()
+
     private(set) var maxZoom: CGFloat = 5
     private(set) var minZoom: CGFloat = 1
 
@@ -73,7 +79,10 @@ final class CameraManager: NSObject, ObservableObject {
         let output = AVCaptureVideoDataOutput()
         output.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
         output.alwaysDiscardsLateVideoFrames = true
-        output.setSampleBufferDelegate(sampleDelegate, queue: DispatchQueue(label: "winx.camera.frames"))
+        // Use the external delegate if provided, otherwise fall back to ourselves
+        // so we can cache the latest frame for snapshot-on-demand.
+        let delegate: AVCaptureVideoDataOutputSampleBufferDelegate = sampleDelegate ?? self
+        output.setSampleBufferDelegate(delegate, queue: DispatchQueue(label: "winx.camera.frames"))
         if session.canAddOutput(output) {
             session.addOutput(output)
             output.connection(with: .video)?.videoOrientation = .portrait
@@ -116,11 +125,36 @@ final class CameraManager: NSObject, ObservableObject {
     /// Returns nil if no frame has been received yet.
     func snapshotJPEG(from sampleBuffer: CMSampleBuffer, quality: CGFloat = 0.85) -> Data? {
         guard let pixel = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
+        return jpegFromPixelBuffer(pixel, quality: quality)
+    }
+
+    /// Take a JPEG snapshot from the cached latest frame.
+    /// Use this when no external delegate is attached.
+    nonisolated func currentSnapshotJPEG(quality: CGFloat = 0.8) -> Data? {
+        pixelBufferLock.lock()
+        let buf = latestPixelBuffer
+        pixelBufferLock.unlock()
+        guard let buf else { return nil }
+        return jpegFromPixelBuffer(buf, quality: quality)
+    }
+
+    nonisolated private func jpegFromPixelBuffer(_ pixel: CVPixelBuffer, quality: CGFloat) -> Data? {
         let ci = CIImage(cvPixelBuffer: pixel)
         let context = CIContext()
         guard let cg = context.createCGImage(ci, from: ci.extent) else { return nil }
         let ui = UIImage(cgImage: cg, scale: 1, orientation: .up)
         return ui.jpegData(compressionQuality: quality)
+    }
+}
+
+extension CameraManager: AVCaptureVideoDataOutputSampleBufferDelegate {
+    nonisolated func captureOutput(_ output: AVCaptureOutput,
+                                   didOutput sampleBuffer: CMSampleBuffer,
+                                   from connection: AVCaptureConnection) {
+        guard let pixel = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+        pixelBufferLock.lock()
+        latestPixelBuffer = pixel
+        pixelBufferLock.unlock()
     }
 }
 

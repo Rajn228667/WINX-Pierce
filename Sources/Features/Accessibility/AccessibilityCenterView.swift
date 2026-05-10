@@ -8,6 +8,28 @@ struct AccessibilityCenterView: View {
 
     var body: some View {
         Form {
+            Section {
+                Button {
+                    applyLowVisionPreset()
+                    HapticManager.shared.tap()
+                    VoiceSynthesizer.shared.speak(loc.tr(.settings_lowvision_hint))
+                } label: {
+                    Label {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(loc.tr(.settings_lowvision_title))
+                                .font(.system(size: 17, weight: .heavy))
+                            Text(loc.tr(.settings_lowvision_hint))
+                                .font(.system(size: 13))
+                                .foregroundStyle(.secondary)
+                        }
+                    } icon: {
+                        Image(systemName: "eye.trianglebadge.exclamationmark.fill")
+                            .foregroundStyle(Theme.brandRed)
+                    }
+                }
+                .accessibilityHint(Text(loc.tr(.settings_lowvision_hint)))
+            }
+
             Section("Текст") {
                 VStack(alignment: .leading) {
                     Text("Размер: \(Int(settings.textScale * 100))%")
@@ -85,5 +107,13 @@ struct AccessibilityCenterView: View {
             }
         }
         .navigationTitle("Доступность")
+    }
+
+    private func applyLowVisionPreset() {
+        // Boost font, bold, and contrast in one tap. Values match Apple's
+        // "Larger Accessibility Sizes" + Bold Text + Increase Contrast.
+        settings.textScale = 1.7
+        settings.boldText = true
+        settings.highContrast = true
     }
 }
