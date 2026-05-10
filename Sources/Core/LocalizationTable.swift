@@ -106,6 +106,26 @@ enum LocalKey: String, CaseIterable {
     case banks_hint
     case banks_opening
 
+    // Walking
+    case walking_intro
+    case walking_auto_on
+    case walking_auto_off
+    case walking_status_safe
+    case walking_status_attention
+    case walking_status_stop
+    case walking_torch_on
+    case walking_torch_off
+
+    // Vision auto-narrate
+    case vision_auto_on
+    case vision_auto_off
+
+    // Low-vision settings
+    case settings_lowvision_title
+    case settings_lowvision_hint
+    case settings_aaa_contrast
+    case settings_xl_text
+
     // Section headers
     case section_eyes
     case section_voice
@@ -351,7 +371,24 @@ extension LocalizationTable {
 
         .banks_intro: "Откройте свой банк одним касанием.",
         .banks_hint: "Если приложение установлено — откроется сразу. Иначе откроется сайт.",
-        .banks_opening: "Открываю"
+        .banks_opening: "Открываю",
+
+        .walking_intro: "Сканер помещения включён. Я буду подсказывать про препятствия и направление.",
+        .walking_auto_on: "Постоянное описание включено.",
+        .walking_auto_off: "Постоянное описание выключено.",
+        .walking_status_safe: "Идём, путь свободен.",
+        .walking_status_attention: "Внимание, рядом препятствие.",
+        .walking_status_stop: "Стоп, прямо перед вами препятствие.",
+        .walking_torch_on: "Фонарик включён.",
+        .walking_torch_off: "Фонарик выключен.",
+
+        .vision_auto_on: "Описание сцены включено.",
+        .vision_auto_off: "Описание сцены выключено.",
+
+        .settings_lowvision_title: "Слабовидящим",
+        .settings_lowvision_hint: "Усиленный контраст и крупный шрифт во всём приложении.",
+        .settings_aaa_contrast: "Максимальный контраст",
+        .settings_xl_text: "Очень крупный текст"
     ]
 
     static let kk: [LocalKey: String] = [
@@ -509,7 +546,24 @@ extension LocalizationTable {
 
         .banks_intro: "Банкіңізді бір рет басып ашыңыз.",
         .banks_hint: "Қолданба орнатылса — бірден ашылады. Жоқ болса — сайт ашылады.",
-        .banks_opening: "Ашылып жатыр"
+        .banks_opening: "Ашылып жатыр",
+
+        .walking_intro: "Бөлме сканері қосылды. Кедергілер мен бағыт туралы айтып отырамын.",
+        .walking_auto_on: "Үздіксіз сипаттау қосулы.",
+        .walking_auto_off: "Үздіксіз сипаттау өшірулі.",
+        .walking_status_safe: "Жол ашық, жүре беріңіз.",
+        .walking_status_attention: "Назар, жанында кедергі бар.",
+        .walking_status_stop: "Тоқтаңыз, тура алдыңызда кедергі бар.",
+        .walking_torch_on: "Шамшырақ қосылды.",
+        .walking_torch_off: "Шамшырақ өшірілді.",
+
+        .vision_auto_on: "Сурет сипаттамасы қосылды.",
+        .vision_auto_off: "Сурет сипаттамасы өшірілді.",
+
+        .settings_lowvision_title: "Көру қабілеті төмен үшін",
+        .settings_lowvision_hint: "Бүкіл қолданбада күшейтілген контраст пен ірі қаріп.",
+        .settings_aaa_contrast: "Максималды контраст",
+        .settings_xl_text: "Өте ірі қаріп"
     ]
 
     static let en: [LocalKey: String] = [
@@ -667,6 +721,23 @@ extension LocalizationTable {
 
         .banks_intro: "Open your bank with one tap.",
         .banks_hint: "If the app is installed it opens instantly. Otherwise the website opens.",
-        .banks_opening: "Opening"
+        .banks_opening: "Opening",
+
+        .walking_intro: "Room scanner is on. I'll guide you around obstacles and direction.",
+        .walking_auto_on: "Continuous narration is on.",
+        .walking_auto_off: "Continuous narration is off.",
+        .walking_status_safe: "Path is clear, keep going.",
+        .walking_status_attention: "Attention, an obstacle is nearby.",
+        .walking_status_stop: "Stop, an obstacle is right in front of you.",
+        .walking_torch_on: "Torch is on.",
+        .walking_torch_off: "Torch is off.",
+
+        .vision_auto_on: "Scene narration is on.",
+        .vision_auto_off: "Scene narration is off.",
+
+        .settings_lowvision_title: "Low vision",
+        .settings_lowvision_hint: "Stronger contrast and a much larger text size everywhere.",
+        .settings_aaa_contrast: "Maximum contrast",
+        .settings_xl_text: "Extra-large text"
     ]
 }
