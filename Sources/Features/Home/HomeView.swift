@@ -79,22 +79,34 @@ struct HomeView: View {
                                 accent: Theme.brandRed
                             ) { AICompanionView() }
                             BigActionTile(
+                                titleKey: .tile_listen,
+                                subtitleKey: .tile_listen_subtitle,
+                                systemImage: "captions.bubble.fill",
+                                accent: Theme.accentOrange
+                            ) { ListenView() }
+                            BigActionTile(
+                                titleKey: .tile_sound_detect,
+                                subtitleKey: .tile_sound_detect_subtitle,
+                                systemImage: "waveform.badge.exclamationmark",
+                                accent: Theme.accentRed
+                            ) { SoundDetectorView() }
+                            BigActionTile(
+                                titleKey: .tile_voice_compose,
+                                subtitleKey: .tile_voice_compose_subtitle,
+                                systemImage: "text.bubble.fill",
+                                accent: Theme.accentPurple
+                            ) { VoiceComposerView() }
+                            BigActionTile(
                                 titleKey: .tile_cards,
                                 subtitleKey: .tile_cards_subtitle,
                                 systemImage: "hand.raised.fill",
                                 accent: Theme.accentSky
                             ) { CardsView() }
                             BigActionTile(
-                                titleKey: .tile_listen,
-                                subtitleKey: .tile_listen_subtitle,
-                                systemImage: "ear",
-                                accent: Theme.accentOrange
-                            ) { ListenView() }
-                            BigActionTile(
                                 titleKey: .tile_ask,
                                 subtitleKey: .tile_ask_subtitle,
-                                systemImage: "text.bubble.fill",
-                                accent: Theme.accentPurple
+                                systemImage: "questionmark.bubble.fill",
+                                accent: Theme.accentEmerald
                             ) { AskView() }
                         }
                         .padding(.horizontal, 16)

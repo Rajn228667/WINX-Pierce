@@ -126,6 +126,48 @@ enum LocalKey: String, CaseIterable {
     case settings_aaa_contrast
     case settings_xl_text
 
+    // Live Captions (Listen module)
+    case listen_intro
+    case listen_start
+    case listen_stop
+    case listen_copy
+    case listen_clear
+    case listen_share
+    case listen_copied
+    case listen_language
+    case listen_font_size
+
+    // Sound Detection
+    case tile_sound_detect
+    case tile_sound_detect_subtitle
+    case sound_intro
+    case sound_listening
+    case sound_paused
+    case sound_alarm
+    case sound_doorbell
+    case sound_glass
+    case sound_dog
+    case sound_baby
+    case sound_siren
+    case sound_speech
+    case sound_water
+    case sound_unknown
+
+    // Voice Composer (type → speak → share)
+    case tile_voice_compose
+    case tile_voice_compose_subtitle
+    case compose_placeholder
+    case compose_speak
+    case compose_share
+    case compose_save
+    case compose_clear
+
+    // Big Mode (one-tap accessibility)
+    case big_mode_title
+    case big_mode_hint
+    case big_mode_on
+    case big_mode_off
+
     // Section headers
     case section_eyes
     case section_voice
@@ -388,7 +430,45 @@ extension LocalizationTable {
         .settings_lowvision_title: "Слабовидящим",
         .settings_lowvision_hint: "Усиленный контраст и крупный шрифт во всём приложении.",
         .settings_aaa_contrast: "Максимальный контраст",
-        .settings_xl_text: "Очень крупный текст"
+        .settings_xl_text: "Очень крупный текст",
+
+        .listen_intro: "Нажмите «Слушать». Я переведу речь собеседника в крупный текст.",
+        .listen_start: "Слушать",
+        .listen_stop: "Стоп",
+        .listen_copy: "Копировать",
+        .listen_clear: "Очистить",
+        .listen_share: "Поделиться",
+        .listen_copied: "Скопировано в буфер.",
+        .listen_language: "Язык распознавания",
+        .listen_font_size: "Размер шрифта",
+
+        .tile_sound_detect: "Звуки",
+        .tile_sound_detect_subtitle: "Тревога · звонок · плач",
+        .sound_intro: "Нажмите «Слушать звуки», и приложение предупредит вас о важных звуках вокруг.",
+        .sound_listening: "Слушаю окружение…",
+        .sound_paused: "На паузе",
+        .sound_alarm: "Сработала тревога — будильник или сигнализация.",
+        .sound_doorbell: "Звонок в дверь.",
+        .sound_glass: "Звук разбитого стекла.",
+        .sound_dog: "Лает собака.",
+        .sound_baby: "Плачет ребёнок.",
+        .sound_siren: "Сирена скорой или полиции.",
+        .sound_speech: "Кто-то говорит рядом.",
+        .sound_water: "Шум воды — кран или душ.",
+        .sound_unknown: "Необычный звук.",
+
+        .tile_voice_compose: "Мой голос",
+        .tile_voice_compose_subtitle: "Текст → речь → отправка",
+        .compose_placeholder: "Напишите, что нужно сказать…",
+        .compose_speak: "Озвучить",
+        .compose_share: "Отправить аудио",
+        .compose_save: "Сохранить",
+        .compose_clear: "Очистить",
+
+        .big_mode_title: "Огромный режим",
+        .big_mode_hint: "Очень крупные кнопки и подписи. Минимум деталей.",
+        .big_mode_on: "Огромный режим включён.",
+        .big_mode_off: "Огромный режим выключен."
     ]
 
     static let kk: [LocalKey: String] = [
@@ -563,7 +643,45 @@ extension LocalizationTable {
         .settings_lowvision_title: "Көру қабілеті төмен үшін",
         .settings_lowvision_hint: "Бүкіл қолданбада күшейтілген контраст пен ірі қаріп.",
         .settings_aaa_contrast: "Максималды контраст",
-        .settings_xl_text: "Өте ірі қаріп"
+        .settings_xl_text: "Өте ірі қаріп",
+
+        .listen_intro: "«Тыңдау» батырмасын басыңыз. Сөзді ірі мәтінге айналдырамын.",
+        .listen_start: "Тыңдау",
+        .listen_stop: "Тоқтату",
+        .listen_copy: "Көшіру",
+        .listen_clear: "Тазарту",
+        .listen_share: "Бөлісу",
+        .listen_copied: "Алмасу буферіне көшірілді.",
+        .listen_language: "Тану тілі",
+        .listen_font_size: "Қаріп өлшемі",
+
+        .tile_sound_detect: "Дыбыстар",
+        .tile_sound_detect_subtitle: "Дабыл · қоңырау · жылау",
+        .sound_intro: "«Дыбыстарды тыңдау» батырмасын басыңыз — маңызды дыбыстар туралы хабарлаймын.",
+        .sound_listening: "Айналаны тыңдап тұрмын…",
+        .sound_paused: "Тоқтаулы",
+        .sound_alarm: "Дабыл — оятқыш немесе дабыл жүйесі.",
+        .sound_doorbell: "Есік қоңырауы.",
+        .sound_glass: "Шыны сынды.",
+        .sound_dog: "Ит үреді.",
+        .sound_baby: "Бала жылайды.",
+        .sound_siren: "Жедел жәрдем немесе полиция дабылы.",
+        .sound_speech: "Біреу сөйлейді.",
+        .sound_water: "Су ағыны — кран немесе душ.",
+        .sound_unknown: "Әдеттен тыс дыбыс.",
+
+        .tile_voice_compose: "Менің даусым",
+        .tile_voice_compose_subtitle: "Мәтін → дауыс → жіберу",
+        .compose_placeholder: "Не айту керек, жазыңыз…",
+        .compose_speak: "Дауыстау",
+        .compose_share: "Аудионы жіберу",
+        .compose_save: "Сақтау",
+        .compose_clear: "Тазарту",
+
+        .big_mode_title: "Алып режим",
+        .big_mode_hint: "Өте ірі батырмалар мен жазулар. Аз бөлшек.",
+        .big_mode_on: "Алып режим қосылды.",
+        .big_mode_off: "Алып режим өшірілді."
     ]
 
     static let en: [LocalKey: String] = [
@@ -738,6 +856,44 @@ extension LocalizationTable {
         .settings_lowvision_title: "Low vision",
         .settings_lowvision_hint: "Stronger contrast and a much larger text size everywhere.",
         .settings_aaa_contrast: "Maximum contrast",
-        .settings_xl_text: "Extra-large text"
+        .settings_xl_text: "Extra-large text",
+
+        .listen_intro: "Tap Listen — I'll turn whatever is said into large clear text.",
+        .listen_start: "Listen",
+        .listen_stop: "Stop",
+        .listen_copy: "Copy",
+        .listen_clear: "Clear",
+        .listen_share: "Share",
+        .listen_copied: "Copied to clipboard.",
+        .listen_language: "Recognition language",
+        .listen_font_size: "Font size",
+
+        .tile_sound_detect: "Sounds",
+        .tile_sound_detect_subtitle: "Alarm · doorbell · cry",
+        .sound_intro: "Tap Listen — I'll alert you when an important sound happens around you.",
+        .sound_listening: "Listening to surroundings…",
+        .sound_paused: "Paused",
+        .sound_alarm: "Alarm or smoke detector going off.",
+        .sound_doorbell: "Doorbell rang.",
+        .sound_glass: "Glass breaking.",
+        .sound_dog: "A dog is barking.",
+        .sound_baby: "A baby is crying.",
+        .sound_siren: "Ambulance or police siren.",
+        .sound_speech: "Someone is speaking nearby.",
+        .sound_water: "Running water — tap or shower.",
+        .sound_unknown: "Unusual sound.",
+
+        .tile_voice_compose: "My voice",
+        .tile_voice_compose_subtitle: "Text → speech → share",
+        .compose_placeholder: "Type what you want to say…",
+        .compose_speak: "Speak",
+        .compose_share: "Send audio",
+        .compose_save: "Save",
+        .compose_clear: "Clear",
+
+        .big_mode_title: "Huge mode",
+        .big_mode_hint: "Extra-large buttons and labels. Minimum detail.",
+        .big_mode_on: "Huge mode enabled.",
+        .big_mode_off: "Huge mode disabled."
     ]
 }

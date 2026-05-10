@@ -28,6 +28,26 @@ struct AccessibilityCenterView: View {
                     }
                 }
                 .accessibilityHint(Text(loc.tr(.settings_lowvision_hint)))
+
+                Button {
+                    applyHugeMode()
+                    HapticManager.shared.tap()
+                    VoiceSynthesizer.shared.speak(loc.tr(.big_mode_on))
+                } label: {
+                    Label {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(loc.tr(.big_mode_title))
+                                .font(.system(size: 17, weight: .heavy))
+                            Text(loc.tr(.big_mode_hint))
+                                .font(.system(size: 13))
+                                .foregroundStyle(.secondary)
+                        }
+                    } icon: {
+                        Image(systemName: "textformat.size.larger")
+                            .foregroundStyle(Theme.brandRed)
+                    }
+                }
+                .accessibilityHint(Text(loc.tr(.big_mode_hint)))
             }
 
             Section("Текст") {
@@ -115,5 +135,16 @@ struct AccessibilityCenterView: View {
         settings.textScale = 1.7
         settings.boldText = true
         settings.highContrast = true
+    }
+
+    /// Maximum-size preset for users with very low vision — text 250%, bold,
+    /// max contrast, all haptics + voice control on.
+    private func applyHugeMode() {
+        settings.textScale = 2.5
+        settings.boldText = true
+        settings.highContrast = true
+        settings.hapticsEnabled = true
+        settings.dangerVibrations = true
+        settings.voiceControlEnabled = true
     }
 }

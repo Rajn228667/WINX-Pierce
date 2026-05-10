@@ -11,21 +11,18 @@ struct HeaderView: View {
 
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            // Brand mark
-            VStack(spacing: 2) {
-                Text("WiNX")
-                    .font(.system(size: 12, weight: .black, design: .default))
-                    .tracking(1.2)
-                Text("pierce")
-                    .font(.system(size: 9, weight: .medium, design: .default))
-                    .tracking(1.0)
-            }
-            .frame(width: 40, height: 40)
-            .foregroundStyle(Theme.primaryText)
-            .background(
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .fill(Theme.elevatedBackground)
-            )
+            // Brand mark — actual logo asset
+            Image("Logo")
+                .resizable()
+                .renderingMode(.template)
+                .foregroundStyle(Theme.primaryText)
+                .scaledToFit()
+                .frame(width: 44, height: 44)
+                .padding(4)
+                .background(
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(Theme.elevatedBackground)
+                )
 
             VStack(alignment: .leading, spacing: 2) {
                 Text("WINX × pierce")
