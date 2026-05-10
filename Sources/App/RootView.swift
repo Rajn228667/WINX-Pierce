@@ -1,7 +1,9 @@
 import SwiftUI
 
 /// Root coordinator. Decides between Onboarding (first launch / no Ollama URL set)
-/// and the main TabView/Home.
+/// and the main TabView/Home. Applies all global accessibility filters
+/// (color-blind correction + blue-light/warm filter) at the very top of the
+/// view tree so every screen inherits them.
 struct RootView: View {
 
     @EnvironmentObject private var settings: SettingsStore
@@ -14,7 +16,7 @@ struct RootView: View {
 
             Group {
                 if showSplash {
-                    SplashView()
+                    HelloSplashView { withAnimation { showSplash = false } }
                         .transition(.opacity)
                 } else if !settings.hasCompletedOnboarding {
                     OnboardingView()
@@ -27,56 +29,58 @@ struct RootView: View {
             .animation(.easeInOut(duration: 0.55), value: showSplash)
             .animation(.easeInOut(duration: 0.45), value: settings.hasCompletedOnboarding)
         }
-        .task {
-            try? await Task.sleep(nanoseconds: 1_400_000_000)
-            withAnimation { showSplash = false }
+        // Accessibility — these stack at the very top of the view tree so every
+        // descendent (sheets, full-screen covers, modal dialogs) inherits them.
+        .modifier(ColorblindFilter(mode: settings.colorblindMode))
+        .modifier(WarmTintOverlay(intensity: settings.blueLightFilter))
+    }
+}
+
+// MARK: - Accessibility filters
+
+/// Approximates color-blindness corrections and the monochrome mode using
+/// SwiftUI primitives that work on iOS 15+. Values are tuned so users
+/// can clearly tell the modes apart while preserving the brand palette.
+struct ColorblindFilter: ViewModifier {
+    let mode: ColorblindMode
+
+    func body(content: Content) -> some View {
+        switch mode {
+        case .none:
+            content
+        case .monochrome:
+            content.saturation(0)
+        case .protanopia:
+            // Reduce red sensitivity → shift hue, drop saturation slightly
+            content
+                .hueRotation(.degrees(-12))
+                .saturation(0.78)
+        case .deuteranopia:
+            // Reduce green sensitivity → shift hue toward blue, mute green
+            content
+                .hueRotation(.degrees(8))
+                .saturation(0.74)
+        case .tritanopia:
+            // Reduce blue sensitivity → shift away from blue, slight desaturation
+            content
+                .hueRotation(.degrees(22))
+                .saturation(0.82)
         }
     }
 }
 
-// MARK: - Splash
-
-struct SplashView: View {
-    @State private var pulse: Bool = false
-    var body: some View {
-        ZStack {
-            LinearGradient(
-                colors: [
-                    Theme.brandRed.opacity(0.18),
-                    Theme.brandPink.opacity(0.10),
-                    Theme.background
-                ],
-                startPoint: .top,
-                endPoint: .bottom
+/// Warm-tint overlay (Night-Shift style). Intensity 0…0.6 — at 0 there is no
+/// effect; at 0.6 the screen has a strong amber wash. Renders above all UI but
+/// below presented sheets so user can always see what they tap.
+struct WarmTintOverlay: ViewModifier {
+    let intensity: Double
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                Color(red: 1.0, green: 0.66, blue: 0.30)
+                    .opacity(min(0.6, max(0, intensity)))
+                    .allowsHitTesting(false)
+                    .ignoresSafeArea()
             )
-            .ignoresSafeArea()
-
-            VStack(spacing: 24) {
-                Image(systemName: "sparkles")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 88, height: 88)
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [Theme.brandRed, Theme.brandPink],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .scaleEffect(pulse ? 1.08 : 0.92)
-                    .animation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: pulse)
-
-                Text("WINX × Pierce")
-                    .font(.system(size: 34, weight: .heavy, design: .rounded))
-                    .foregroundStyle(Theme.primaryText)
-
-                Text(Config.appSubtitle)
-                    .font(.system(size: 15, weight: .medium, design: .rounded))
-                    .foregroundStyle(Theme.secondaryText)
-            }
-        }
-        .onAppear { pulse = true }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(Text("WINX × Pierce. \(Config.appSubtitle)"))
     }
 }

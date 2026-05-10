@@ -17,6 +17,10 @@ struct HomeView: View {
                     VStack(spacing: 16) {
                         HeaderView()
 
+                        // Time-of-day greeting (mirrors Android HomeScreen)
+                        GreetingBanner()
+                            .padding(.horizontal, 16)
+
                         // Hero AI Companion card
                         NavigationLink {
                             AICompanionView()
@@ -56,6 +60,12 @@ struct HomeView: View {
                                 systemImage: "rectangle.3.group.fill",
                                 accent: Theme.accentPurple
                             ) { SceneUnderstandingView() }
+                            BigActionTile(
+                                titleKey: .tile_tools,
+                                subtitleKey: .tile_tools_subtitle,
+                                systemImage: "wrench.and.screwdriver.fill",
+                                accent: Theme.accentEmerald
+                            ) { ToolsView() }
                         }
                         .padding(.horizontal, 16)
 
@@ -69,22 +79,34 @@ struct HomeView: View {
                                 accent: Theme.brandRed
                             ) { AICompanionView() }
                             BigActionTile(
+                                titleKey: .tile_listen,
+                                subtitleKey: .tile_listen_subtitle,
+                                systemImage: "captions.bubble.fill",
+                                accent: Theme.accentOrange
+                            ) { ListenView() }
+                            BigActionTile(
+                                titleKey: .tile_sound_detect,
+                                subtitleKey: .tile_sound_detect_subtitle,
+                                systemImage: "waveform.badge.exclamationmark",
+                                accent: Theme.accentRed
+                            ) { SoundDetectorView() }
+                            BigActionTile(
+                                titleKey: .tile_voice_compose,
+                                subtitleKey: .tile_voice_compose_subtitle,
+                                systemImage: "text.bubble.fill",
+                                accent: Theme.accentPurple
+                            ) { VoiceComposerView() }
+                            BigActionTile(
                                 titleKey: .tile_cards,
                                 subtitleKey: .tile_cards_subtitle,
                                 systemImage: "hand.raised.fill",
                                 accent: Theme.accentSky
                             ) { CardsView() }
                             BigActionTile(
-                                titleKey: .tile_listen,
-                                subtitleKey: .tile_listen_subtitle,
-                                systemImage: "ear",
-                                accent: Theme.accentOrange
-                            ) { ListenView() }
-                            BigActionTile(
                                 titleKey: .tile_ask,
                                 subtitleKey: .tile_ask_subtitle,
-                                systemImage: "text.bubble.fill",
-                                accent: Theme.accentPurple
+                                systemImage: "questionmark.bubble.fill",
+                                accent: Theme.accentEmerald
                             ) { AskView() }
                         }
                         .padding(.horizontal, 16)
@@ -158,6 +180,12 @@ struct HomeView: View {
                                 systemImage: "text.book.closed.fill",
                                 accent: Theme.accentGreen
                             ) { DiaryView() }
+                            BigActionTile(
+                                titleKey: .tile_banks,
+                                subtitleKey: .tile_banks_subtitle,
+                                systemImage: "creditcard.fill",
+                                accent: Theme.accentRed
+                            ) { BanksView() }
                         }
                         .padding(.horizontal, 16)
 

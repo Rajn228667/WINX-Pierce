@@ -22,8 +22,8 @@ settings:
     CODE_SIGNING_REQUIRED: NO
     CODE_SIGNING_ALLOWED: NO
     PROVISIONING_PROFILE_SPECIFIER: ""
-    MARKETING_VERSION: "1.0.0"
-    CURRENT_PROJECT_VERSION: "1"
+    MARKETING_VERSION: "1.4.0"
+    CURRENT_PROJECT_VERSION: "5"
 
 targets:
   WINXPierce:
@@ -95,6 +95,8 @@ targets:
           - maps
           - http
           - https
+          - kaspi
+          - homebank
         UIBackgroundModes:
           - audio
           - location
