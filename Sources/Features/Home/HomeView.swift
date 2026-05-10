@@ -17,6 +17,10 @@ struct HomeView: View {
                     VStack(spacing: 16) {
                         HeaderView()
 
+                        // Time-of-day greeting (mirrors Android HomeScreen)
+                        GreetingBanner()
+                            .padding(.horizontal, 16)
+
                         // Hero AI Companion card
                         NavigationLink {
                             AICompanionView()
@@ -56,6 +60,12 @@ struct HomeView: View {
                                 systemImage: "rectangle.3.group.fill",
                                 accent: Theme.accentPurple
                             ) { SceneUnderstandingView() }
+                            BigActionTile(
+                                titleKey: .tile_tools,
+                                subtitleKey: .tile_tools_subtitle,
+                                systemImage: "wrench.and.screwdriver.fill",
+                                accent: Theme.accentEmerald
+                            ) { ToolsView() }
                         }
                         .padding(.horizontal, 16)
 
@@ -158,6 +168,12 @@ struct HomeView: View {
                                 systemImage: "text.book.closed.fill",
                                 accent: Theme.accentGreen
                             ) { DiaryView() }
+                            BigActionTile(
+                                titleKey: .tile_banks,
+                                subtitleKey: .tile_banks_subtitle,
+                                systemImage: "creditcard.fill",
+                                accent: Theme.accentRed
+                            ) { BanksView() }
                         }
                         .padding(.horizontal, 16)
 

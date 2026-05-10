@@ -181,6 +181,11 @@ final class OllamaClient {
         return try await chat(model: visionModel, messages: [userMsg], temperature: 0.4)
     }
 
+    /// Alias used by ToolsView — identical to describeImage but clearer name.
+    func chatWithVision(model: String, prompt: String, imageBase64: String) async throws -> String {
+        try await describeImage(base64JPEG: imageBase64, prompt: prompt, model: model)
+    }
+
     // MARK: - Helpers
 
     private func baseURL() -> URL? {

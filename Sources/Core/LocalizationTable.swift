@@ -72,6 +72,39 @@ enum LocalKey: String, CaseIterable {
     case tile_scene_subtitle
     case tile_accessibility
     case tile_accessibility_subtitle
+    case tile_tools
+    case tile_tools_subtitle
+    case tile_banks
+    case tile_banks_subtitle
+
+    // Greetings
+    case greeting_morning
+    case greeting_day
+    case greeting_evening
+    case greeting_night
+
+    // Tools (mirror Android ToolsScreen)
+    case tools_intro
+    case tools_scene
+    case tools_scene_hint
+    case tools_color
+    case tools_color_hint
+    case tools_money
+    case tools_money_hint
+    case tools_light
+    case tools_light_hint
+    case tools_face
+    case tools_face_hint
+    case tools_time
+    case tools_battery
+    case tools_capturing
+    case tools_processing
+    case tools_no_snapshot
+
+    // Banks
+    case banks_intro
+    case banks_hint
+    case banks_opening
 
     // Section headers
     case section_eyes
@@ -287,7 +320,38 @@ extension LocalizationTable {
 
         .err_no_permission: "Нет разрешения",
         .err_network: "Нет соединения",
-        .err_ollama_offline: "Нейросеть не отвечает. Проверьте туннель."
+        .err_ollama_offline: "Нейросеть не отвечает. Проверьте туннель.",
+
+        .tile_tools: "Инструменты",
+        .tile_tools_subtitle: "Цвет · свет · купюра · время",
+        .tile_banks: "Банки",
+        .tile_banks_subtitle: "Kaspi · Halyk",
+
+        .greeting_morning: "Доброе утро",
+        .greeting_day: "Добрый день",
+        .greeting_evening: "Добрый вечер",
+        .greeting_night: "Доброй ночи",
+
+        .tools_intro: "Выберите инструмент. Я помогу разобраться.",
+        .tools_scene: "Что передо мной",
+        .tools_scene_hint: "Опишу предметы и людей в кадре",
+        .tools_color: "Цвет",
+        .tools_color_hint: "Назову основные цвета объекта",
+        .tools_money: "Купюра",
+        .tools_money_hint: "Распознаю валюту и номинал",
+        .tools_light: "Свет",
+        .tools_light_hint: "Подскажу, светло или темно",
+        .tools_face: "Лицо",
+        .tools_face_hint: "Опишу человека напротив",
+        .tools_time: "Время",
+        .tools_battery: "Батарея",
+        .tools_capturing: "Делаю снимок...",
+        .tools_processing: "Анализирую...",
+        .tools_no_snapshot: "Не удалось сделать снимок",
+
+        .banks_intro: "Откройте свой банк одним касанием.",
+        .banks_hint: "Если приложение установлено — откроется сразу. Иначе откроется сайт.",
+        .banks_opening: "Открываю"
     ]
 
     static let kk: [LocalKey: String] = [
@@ -414,7 +478,38 @@ extension LocalizationTable {
 
         .err_no_permission: "Рұқсат жоқ",
         .err_network: "Желі жоқ",
-        .err_ollama_offline: "Нейрожүйе жауап бермейді."
+        .err_ollama_offline: "Нейрожүйе жауап бермейді.",
+
+        .tile_tools: "Құралдар",
+        .tile_tools_subtitle: "Түс · жарық · купюра · уақыт",
+        .tile_banks: "Банктер",
+        .tile_banks_subtitle: "Kaspi · Halyk",
+
+        .greeting_morning: "Қайырлы таң",
+        .greeting_day: "Қайырлы күн",
+        .greeting_evening: "Қайырлы кеш",
+        .greeting_night: "Қайырлы түн",
+
+        .tools_intro: "Құрал таңдаңыз. Көмектесемін.",
+        .tools_scene: "Алдымда не бар",
+        .tools_scene_hint: "Кадрдағы заттарды сипаттаймын",
+        .tools_color: "Түс",
+        .tools_color_hint: "Заттың негізгі түстерін айтам",
+        .tools_money: "Купюра",
+        .tools_money_hint: "Валюта мен номиналын танимын",
+        .tools_light: "Жарық",
+        .tools_light_hint: "Жарық па, қараңғы ма — айтам",
+        .tools_face: "Бет",
+        .tools_face_hint: "Қарсы алдыңыздағы адамды сипаттаймын",
+        .tools_time: "Уақыт",
+        .tools_battery: "Батарея",
+        .tools_capturing: "Сурет түсіріп жатырмын...",
+        .tools_processing: "Талдап жатырмын...",
+        .tools_no_snapshot: "Сурет түсіру мүмкін болмады",
+
+        .banks_intro: "Банкіңізді бір рет басып ашыңыз.",
+        .banks_hint: "Қолданба орнатылса — бірден ашылады. Жоқ болса — сайт ашылады.",
+        .banks_opening: "Ашылып жатыр"
     ]
 
     static let en: [LocalKey: String] = [
@@ -541,6 +636,37 @@ extension LocalizationTable {
 
         .err_no_permission: "No permission",
         .err_network: "No connection",
-        .err_ollama_offline: "AI is not responding. Check the tunnel."
+        .err_ollama_offline: "AI is not responding. Check the tunnel.",
+
+        .tile_tools: "Tools",
+        .tile_tools_subtitle: "Colour · light · banknote · time",
+        .tile_banks: "Banks",
+        .tile_banks_subtitle: "Kaspi · Halyk",
+
+        .greeting_morning: "Good morning",
+        .greeting_day: "Good afternoon",
+        .greeting_evening: "Good evening",
+        .greeting_night: "Good night",
+
+        .tools_intro: "Pick a tool. I'll help you figure it out.",
+        .tools_scene: "What's in front of me",
+        .tools_scene_hint: "I describe objects and people in view",
+        .tools_color: "Colour",
+        .tools_color_hint: "I name the main colours of the object",
+        .tools_money: "Banknote",
+        .tools_money_hint: "I recognise currency and value",
+        .tools_light: "Light",
+        .tools_light_hint: "I tell you if it's bright or dark",
+        .tools_face: "Face",
+        .tools_face_hint: "I describe the person in front of you",
+        .tools_time: "Time",
+        .tools_battery: "Battery",
+        .tools_capturing: "Taking a snapshot...",
+        .tools_processing: "Analysing...",
+        .tools_no_snapshot: "Couldn't take a snapshot",
+
+        .banks_intro: "Open your bank with one tap.",
+        .banks_hint: "If the app is installed it opens instantly. Otherwise the website opens.",
+        .banks_opening: "Opening"
     ]
 }

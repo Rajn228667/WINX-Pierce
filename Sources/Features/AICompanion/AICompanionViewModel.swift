@@ -20,8 +20,17 @@ final class AICompanionViewModel: ObservableObject {
     private var amplitudeTask: Task<Void, Never>?
 
     init() {
-        // Seed with the system prompt.
-        messages.append(OllamaClient.Message(role: "system", content: Config.companionSystemPrompt))
+        // Seed with the system prompt — uses the user's currently selected language.
+        messages.append(OllamaClient.Message(role: "system", content: Self.systemPromptForCurrentLanguage()))
+
+        // Refresh the system prompt whenever the user switches language.
+        LocalizationManager.shared.$currentLanguage
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.refreshSystemPrompt()
+            }
+            .store(in: &cancellables)
 
         recognizer.$transcript
             .receive(on: DispatchQueue.main)
@@ -157,6 +166,25 @@ final class AICompanionViewModel: ObservableObject {
         guard let firstEnd = slice.firstIndex(where: { ".?!\n;".contains($0) }) else { return nil }
         let after = text.index(after: firstEnd)
         return text.distance(from: text.startIndex, to: after)
+    }
+
+    // MARK: - System prompt (language-aware)
+
+    static func systemPromptForCurrentLanguage() -> String {
+        switch LocalizationManager.shared.currentLanguage {
+        case .ru, .system: return Config.systemPromptRu
+        case .kk: return Config.systemPromptKk
+        case .en: return Config.systemPromptEn
+        }
+    }
+
+    private func refreshSystemPrompt() {
+        let newPrompt = Self.systemPromptForCurrentLanguage()
+        if let idx = messages.firstIndex(where: { $0.role == "system" }) {
+            messages[idx] = OllamaClient.Message(role: "system", content: newPrompt)
+        } else {
+            messages.insert(OllamaClient.Message(role: "system", content: newPrompt), at: 0)
+        }
     }
 
     // MARK: - Amplitude
