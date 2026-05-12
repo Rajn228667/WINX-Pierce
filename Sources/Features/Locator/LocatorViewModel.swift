@@ -32,9 +32,10 @@ final class LocatorViewModel: NSObject, ObservableObject {
     private let speech = VoiceSynthesizer.shared
     private let haptics = HapticManager.shared
 
-    private lazy var analyzer: ObstacleAnalyzer = ObstacleAnalyzer(proximityThreshold: 0.10) { [weak self] snap in
-        Task { @MainActor in self?.handleSnapshot(snap) }
-    }
+    /// `nonisolated` so the capture-output delegate (which runs on a private
+    /// dispatch queue) can call `analyze(pixelBuffer:)` without hopping to the
+    /// main actor first.
+    private nonisolated(unsafe) var analyzer: ObstacleAnalyzer!
 
     // MARK: - Cadence state
 
@@ -51,6 +52,9 @@ final class LocatorViewModel: NSObject, ObservableObject {
 
     override init() {
         super.init()
+        self.analyzer = ObstacleAnalyzer(proximityThreshold: 0.10) { [weak self] snap in
+            Task { @MainActor in self?.handleSnapshot(snap) }
+        }
         camera.configure(sampleDelegate: self)
         message = LocalizationManager.shared.tr(.locator_status_clear)
     }
