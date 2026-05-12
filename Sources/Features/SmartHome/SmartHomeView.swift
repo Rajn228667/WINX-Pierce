@@ -36,6 +36,7 @@ struct SmartHomeView: View {
         }
         .navigationTitle("Умный дом")
         .onAppear { hk.start() }
+            .voiceGuide(.guide_smart_home)
     }
 }
 

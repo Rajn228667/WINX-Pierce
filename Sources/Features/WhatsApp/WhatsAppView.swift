@@ -144,6 +144,7 @@ struct WhatsAppView: View {
                 ActivityShareSheet(items: [url])
             }
         }
+            .voiceGuide(.guide_whatsapp)
     }
 
     private func timeString(_ t: TimeInterval) -> String {

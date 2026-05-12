@@ -83,6 +83,7 @@ struct NavigationFeatureView: View {
         }
         .padding(.top)
         .onAppear { vm.requestLocation() }
+            .voiceGuide(.guide_navigation)
     }
 
     private func quickButton(icon: String, label: String, color: Color, action: @escaping () -> Void) -> some View {

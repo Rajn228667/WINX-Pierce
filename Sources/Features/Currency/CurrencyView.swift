@@ -37,6 +37,7 @@ struct CurrencyView: View {
                 .padding()
             }
         }
+            .voiceGuide(.guide_currency)
     }
 }
 

@@ -76,6 +76,7 @@ struct WalkingView: View {
         }
         .navigationTitle(loc.tr(.tile_walking))
         .navigationBarTitleDisplayMode(.inline)
+            .voiceGuide(.guide_walking)
     }
 
     private func pillButton(systemImage: String, on: Bool, accent: Color,

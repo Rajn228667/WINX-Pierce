@@ -82,5 +82,6 @@ struct HealthView: View {
             }
         }
         .navigationTitle("Здоровье")
+            .voiceGuide(.guide_health)
     }
 }

@@ -48,6 +48,7 @@ struct LocatorView: View {
             Spacer()
         }
         .onDisappear { motion.stop() }
+            .voiceGuide(.guide_locator)
     }
 }
 

@@ -70,6 +70,7 @@ struct VisionScanView: View {
                 .padding(.bottom, 20)
             }
         }
+            .voiceGuide(.guide_scan)
     }
 
     private func boxColor(for label: String) -> Color {

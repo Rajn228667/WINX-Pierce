@@ -139,6 +139,7 @@ struct TelegramView: View {
                 ActivityShareSheet(items: [url])
             }
         }
+            .voiceGuide(.guide_telegram)
     }
 
     private func timeString(_ t: TimeInterval) -> String {

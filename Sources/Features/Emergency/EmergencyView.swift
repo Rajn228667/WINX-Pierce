@@ -104,6 +104,7 @@ struct EmergencyView: View {
                 ActivityShareSheet(items: [url])
             }
         }
+            .voiceGuide(.guide_sos)
     }
 
     private func startHold() {

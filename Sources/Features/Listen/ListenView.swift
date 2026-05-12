@@ -161,6 +161,7 @@ struct ListenView: View {
             let full = sessionTranscript + (sessionTranscript.isEmpty ? "" : "\n") + recognizer.transcript
             ActivityShareSheet(items: [full])
         }
+            .voiceGuide(.guide_listen)
     }
 
     private func fontButton(icon: String, action: @escaping () -> Void) -> some View {

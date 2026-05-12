@@ -236,6 +236,7 @@ struct HomeView: View {
             presentedRoute = v
         }
         .eyeComfortOverlay()
+        .voiceGuide(.guide_home)
     }
 
     @ViewBuilder
