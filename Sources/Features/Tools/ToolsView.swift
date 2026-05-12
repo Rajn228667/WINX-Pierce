@@ -55,7 +55,25 @@ struct ToolsView: View {
                        hint: loc.tr(.tools_face_hint),
                        icon: "person.fill",
                        color: Theme.brandPink,
-                       prompt: prompt(for: "face"))
+                       prompt: prompt(for: "face")),
+            CameraTool(id: "sign",
+                       title: loc.tr(.tools_sign),
+                       hint: loc.tr(.tools_sign_hint),
+                       icon: "signpost.right.fill",
+                       color: Theme.brandRed,
+                       prompt: prompt(for: "sign")),
+            CameraTool(id: "document",
+                       title: loc.tr(.tools_document),
+                       hint: loc.tr(.tools_document_hint),
+                       icon: "doc.text.fill",
+                       color: Theme.accentBlue,
+                       prompt: prompt(for: "document")),
+            CameraTool(id: "finder",
+                       title: loc.tr(.tools_finder),
+                       hint: loc.tr(.tools_finder_hint),
+                       icon: "magnifyingglass.circle.fill",
+                       color: Theme.accentEmerald,
+                       prompt: prompt(for: "finder"))
         ]
     }
 
@@ -307,6 +325,27 @@ struct ToolsView: View {
             return "Фотодағы адамды сипатта: жынысы, шамамен жасы, бет әлпеті. Адам жоқ болса — айт."
         case ("face", .en):
             return "Describe the person in the photo: gender, approximate age, expression. If there's no face — say so."
+
+        case ("sign", .ru), ("sign", .system):
+            return "Прочитай и кратко объясни табличку, дорожный знак или вывеску на фото. Если знак понятен — скажи его смысл в одну фразу."
+        case ("sign", .kk):
+            return "Фотодағы көрсеткішті, жол белгісін немесе жазуды оқып, қысқаша түсіндір. Бір сөйлеммен жауап бер."
+        case ("sign", .en):
+            return "Read and briefly explain the road sign, plaque, or signage in the photo. One short sentence."
+
+        case ("document", .ru), ("document", .system):
+            return "На фото — документ или чек. Распознай и перескажи самое важное: тип документа, суммы, даты, имена. До трёх предложений."
+        case ("document", .kk):
+            return "Фотода құжат немесе чек бар. Маңыздыны қысқаша айт: түрі, сомалар, күндер, атаулар. Үш сөйлемге дейін."
+        case ("document", .en):
+            return "The photo shows a document or receipt. Recognise and summarise the essentials: type, amounts, dates, names. Up to three sentences."
+
+        case ("finder", .ru), ("finder", .system):
+            return "Помоги слабовидящему найти на этом фото обычные предметы (ключи, телефон, пульт, очки, кошелёк, чашку, бутылку). Перечисли, что видишь и где оно расположено — слева, справа, в центре, на столе. До трёх предложений."
+        case ("finder", .kk):
+            return "Әлсіз көретін адамға фотодан жиі қажет заттарды (кілт, телефон, пульт, көзілдірік, әмиян, кесе, бөтелке) табуға көмектес. Не көріп тұрғаныңды және қайда екенін айт. Үш сөйлемге дейін."
+        case ("finder", .en):
+            return "Help a visually impaired user find common objects in this photo (keys, phone, remote, glasses, wallet, cup, bottle). List what you see and where it is — left, right, center, on the table. Up to three sentences."
 
         default:
             return "Опиши, что на фото."

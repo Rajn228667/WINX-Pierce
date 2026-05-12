@@ -95,6 +95,12 @@ enum LocalKey: String, CaseIterable {
     case tools_light_hint
     case tools_face
     case tools_face_hint
+    case tools_sign
+    case tools_sign_hint
+    case tools_document
+    case tools_document_hint
+    case tools_finder
+    case tools_finder_hint
     case tools_time
     case tools_battery
     case tools_capturing
@@ -513,6 +519,12 @@ extension LocalizationTable {
         .tools_light_hint: "Подскажу, светло или темно",
         .tools_face: "Лицо",
         .tools_face_hint: "Опишу человека напротив",
+        .tools_sign: "Дорожный знак",
+        .tools_sign_hint: "Прочитаю табличку или дорожный знак",
+        .tools_document: "Документ",
+        .tools_document_hint: "Сжато перескажу бумагу или чек",
+        .tools_finder: "Найти предмет",
+        .tools_finder_hint: "Поищу ключи, телефон, пульт и другие вещи",
         .tools_time: "Время",
         .tools_battery: "Батарея",
         .tools_capturing: "Делаю снимок...",
@@ -826,6 +838,12 @@ extension LocalizationTable {
         .tools_light_hint: "Жарық па, қараңғы ма — айтам",
         .tools_face: "Бет",
         .tools_face_hint: "Қарсы алдыңыздағы адамды сипаттаймын",
+        .tools_sign: "Жол белгісі",
+        .tools_sign_hint: "Көрсеткіш немесе жол белгісін оқимын",
+        .tools_document: "Құжат",
+        .tools_document_hint: "Қысқаша түсіндіремін",
+        .tools_finder: "Затты табу",
+        .tools_finder_hint: "Кілт, телефон, басқасын іздеймін",
         .tools_time: "Уақыт",
         .tools_battery: "Батарея",
         .tools_capturing: "Сурет түсіріп жатырмын...",
@@ -1139,6 +1157,12 @@ extension LocalizationTable {
         .tools_light_hint: "I tell you if it's bright or dark",
         .tools_face: "Face",
         .tools_face_hint: "I describe the person in front of you",
+        .tools_sign: "Road sign",
+        .tools_sign_hint: "Read a road sign or wall plaque",
+        .tools_document: "Document",
+        .tools_document_hint: "Summarise a paper or receipt",
+        .tools_finder: "Find item",
+        .tools_finder_hint: "Look for keys, phone, remote — anything",
         .tools_time: "Time",
         .tools_battery: "Battery",
         .tools_capturing: "Taking a snapshot...",
