@@ -94,7 +94,7 @@ final class SceneUnderstandingViewModel: NSObject, ObservableObject {
         case .en: prompt = "Describe what I see as if to a friend. Short, warm tone, up to 3 sentences."
         }
         do {
-            let reply = try await OllamaClient.shared.describeImage(base64JPEG: jpeg.base64EncodedString(), prompt: prompt)
+            let reply = try await AIRouter.shared.describeImage(base64JPEG: jpeg.base64EncodedString(), prompt: prompt)
             lastDescription = reply
             VoiceSynthesizer.shared.speak(reply)
         } catch {

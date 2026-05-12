@@ -11,6 +11,8 @@ enum KeychainStore {
         case ollamaBaseURL
         case openAIKey
         case elevenLabsKey
+        case geminiKey
+        case xaiKey
     }
 
     @discardableResult

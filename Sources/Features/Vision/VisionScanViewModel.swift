@@ -95,7 +95,7 @@ final class VisionScanViewModel: NSObject, ObservableObject {
     private func sendForDescription(jpeg: Data, prompt: String, interrupt: Bool = true) async {
         let base64 = jpeg.base64EncodedString()
         do {
-            let reply = try await OllamaClient.shared.describeImage(base64JPEG: base64, prompt: prompt)
+            let reply = try await AIRouter.shared.describeImage(base64JPEG: base64, prompt: prompt)
             let trimmed = reply.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !trimmed.isEmpty else { return }
             lastSpokenSummary = trimmed

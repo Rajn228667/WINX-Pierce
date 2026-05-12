@@ -56,9 +56,8 @@ final class OCRReaderViewModel: NSObject, ObservableObject {
         }
         Task {
             do {
-                let reply = try await OllamaClient.shared.chat(
-                    model: Config.fastModel,
-                    messages: [.init(role: "user", content: prompt)],
+                let reply = try await AIRouter.shared.chat(
+                    messages: [AIMessage(role: .user, content: prompt)],
                     temperature: 0.4
                 )
                 VoiceSynthesizer.shared.speak(reply)
@@ -80,9 +79,8 @@ final class OCRReaderViewModel: NSObject, ObservableObject {
         let prompt = "Переведи следующий текст на \(target). Дай только перевод, ничего больше.\n\(recognizedText)"
         Task {
             do {
-                let reply = try await OllamaClient.shared.chat(
-                    model: Config.fastModel,
-                    messages: [.init(role: "user", content: prompt)],
+                let reply = try await AIRouter.shared.chat(
+                    messages: [AIMessage(role: .user, content: prompt)],
                     temperature: 0.2
                 )
                 VoiceSynthesizer.shared.speak(reply)

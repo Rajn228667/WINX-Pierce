@@ -267,10 +267,9 @@ struct ToolsView: View {
             let base64 = jpeg.base64EncodedString()
 
             do {
-                let reply = try await OllamaClient.shared.chatWithVision(
-                    model: Config.visionModel,
-                    prompt: tool.prompt,
-                    imageBase64: base64
+                let reply = try await AIRouter.shared.describeImage(
+                    base64JPEG: base64,
+                    prompt: tool.prompt
                 )
                 let trimmed = reply.trimmingCharacters(in: .whitespacesAndNewlines)
                 result = trimmed

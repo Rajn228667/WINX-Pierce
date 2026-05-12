@@ -23,7 +23,7 @@ struct OnboardingView: View {
                 WelcomePage(onNext: next).tag(0)
                 LanguagePage(onNext: next).tag(1)
                 PermissionsPage(onNext: next).tag(2)
-                OllamaSetupPage(onFinish: finish).tag(3)
+                AISetupPage(onFinish: finish).tag(3)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .frame(maxHeight: .infinity)
@@ -196,71 +196,28 @@ private struct PermissionsPage: View {
     }
 }
 
-private struct OllamaSetupPage: View {
+private struct AISetupPage: View {
     let onFinish: () -> Void
     @EnvironmentObject private var loc: LocalizationManager
-    @State private var url: String = KeychainStore.ollamaBaseURL ?? ""
-    @State private var status: TestStatus = .idle
-
-    enum TestStatus: Equatable {
-        case idle, testing, ok, fail(String)
-    }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text(loc.tr(.onb_ollama_title))
-                .font(.system(size: 28, weight: .heavy, design: .rounded))
-            Text(loc.tr(.onb_ollama_body))
-                .foregroundStyle(Theme.secondaryText)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                Text(loc.tr(.onb_ai_title))
+                    .font(.system(size: 28, weight: .heavy, design: .rounded))
+                Text(loc.tr(.onb_ai_body))
+                    .foregroundStyle(Theme.secondaryText)
+                    .padding(.bottom, 4)
 
-            TextField(loc.tr(.onb_ollama_placeholder), text: $url)
-                .textFieldStyle(.roundedBorder)
-                .keyboardType(.URL)
-                .textInputAutocapitalization(.never)
-                .autocorrectionDisabled(true)
+                AIProviderSettingsView(showCloseButton: false)
+                    .padding(.bottom, 8)
 
-            HStack {
-                Button(loc.tr(.onb_ollama_test)) {
-                    Task { await test() }
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(url.trimmingCharacters(in: .whitespaces).isEmpty || status == .testing)
-                Spacer()
-                statusBadge
+                Button(loc.tr(.onb_finish)) { onFinish() }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                    .frame(maxWidth: .infinity)
             }
-
-            Button(loc.tr(.onb_ollama_skip)) { onFinish() }
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.top, 6)
-
-            Spacer()
-        }
-        .padding()
-        .onChange(of: url) { _ in status = .idle }
-    }
-
-    @ViewBuilder
-    private var statusBadge: some View {
-        switch status {
-        case .idle: EmptyView()
-        case .testing: ProgressView()
-        case .ok:
-            HStack(spacing: 6) { Image(systemName: "checkmark.circle.fill"); Text("OK") }
-                .foregroundStyle(Theme.accentEmerald)
-        case .fail(let msg):
-            Label(msg, systemImage: "exclamationmark.triangle.fill")
-                .foregroundStyle(Theme.accentRed)
-                .font(.caption)
-        }
-    }
-
-    private func test() async {
-        status = .testing
-        KeychainStore.ollamaBaseURL = url.trimmingCharacters(in: .whitespaces)
-        let ok = await OllamaClient.shared.ping()
-        status = ok ? .ok : .fail("Ollama не отвечает")
-        if ok {
-            VoiceSynthesizer.shared.speak("Связь с нейросетью установлена.")
+            .padding()
         }
     }
 }

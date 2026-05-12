@@ -171,16 +171,11 @@ struct AccessibilityCenterView: View {
 
             // ── AI ────────────────────────────────────────────────────────
             Section(loc.tr(.acc_ai_section)) {
-                Picker(loc.tr(.acc_ai_model), selection: $settings.preferredCompanionModel) {
-                    Text("llama3.2:3b").tag("llama3.2:3b")
-                    Text("qwen2.5:7b").tag("qwen2.5:7b")
-                    Text("qwen2.5-coder:7b").tag("qwen2.5-coder:7b")
-                    Text("llava:7b").tag("llava:7b")
-                }
                 NavigationLink {
-                    OllamaURLEditView()
+                    AIProviderSettingsView(showCloseButton: false)
+                        .navigationTitle(loc.tr(.ai_settings_title))
                 } label: {
-                    Label(loc.tr(.acc_ai_url), systemImage: "network")
+                    Label(loc.tr(.ai_settings_title), systemImage: "sparkles")
                 }
             }
         }
