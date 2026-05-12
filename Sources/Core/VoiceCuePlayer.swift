@@ -8,6 +8,7 @@ import AVFoundation
 ///   - `.stopWall`   = "Остановитесь, впереди стена."
 ///   - `.turnLeft`   = "Впереди препятствия, поверните левее."
 ///   - `.turnRight`  = "Впереди препятствия, поверните правее."
+///   - `.idle`       = idle nudge after 15 s of silence.
 ///
 /// The player owns its own `AVAudioPlayer` so it can run alongside TTS without
 /// blocking. It also debounces: the same cue won't fire more than once every
@@ -21,6 +22,7 @@ final class VoiceCuePlayer: NSObject, ObservableObject {
         case stopWall   = "voice_stop_wall"
         case turnLeft   = "voice_turn_left"
         case turnRight  = "voice_turn_right"
+        case idle       = "voice_idle_15s"
     }
 
     @Published private(set) var isPlaying: Bool = false

@@ -95,6 +95,12 @@ enum LocalKey: String, CaseIterable {
     case tools_light_hint
     case tools_face
     case tools_face_hint
+    case tools_sign
+    case tools_sign_hint
+    case tools_document
+    case tools_document_hint
+    case tools_finder
+    case tools_finder_hint
     case tools_time
     case tools_battery
     case tools_capturing
@@ -332,6 +338,18 @@ enum LocalKey: String, CaseIterable {
     case common_loading
     case common_empty
     case common_offline_label
+
+    // Locator (room scanner) — status banner messages
+    case locator_intro
+    case locator_status_clear
+    case locator_status_turn_left
+    case locator_status_turn_right
+    case locator_status_stop_wall
+    case locator_status_dark
+    case locator_heartbeat
+
+    // Generic control labels
+    case acc_flashlight
 }
 
 /// Embedded localisations. Translators only need to edit this one Swift file.
@@ -501,6 +519,12 @@ extension LocalizationTable {
         .tools_light_hint: "Подскажу, светло или темно",
         .tools_face: "Лицо",
         .tools_face_hint: "Опишу человека напротив",
+        .tools_sign: "Дорожный знак",
+        .tools_sign_hint: "Прочитаю табличку или дорожный знак",
+        .tools_document: "Документ",
+        .tools_document_hint: "Сжато перескажу бумагу или чек",
+        .tools_finder: "Найти предмет",
+        .tools_finder_hint: "Поищу ключи, телефон, пульт и другие вещи",
         .tools_time: "Время",
         .tools_battery: "Батарея",
         .tools_capturing: "Делаю снимок...",
@@ -654,7 +678,17 @@ extension LocalizationTable {
         .common_retry: "Повторить",
         .common_loading: "Загрузка…",
         .common_empty: "Здесь пока пусто",
-        .common_offline_label: "Нет сети"
+        .common_offline_label: "Нет сети",
+
+        .locator_intro: "Локатор включён. Я подскажу, если что-то впереди.",
+        .locator_status_clear: "Путь свободен. Идите вперёд.",
+        .locator_status_turn_left: "Препятствие справа. Поверните левее.",
+        .locator_status_turn_right: "Препятствие слева. Поверните правее.",
+        .locator_status_stop_wall: "Остановитесь! Впереди стена.",
+        .locator_status_dark: "Слишком темно. Включите фонарь.",
+        .locator_heartbeat: "Путь свободен.",
+
+        .acc_flashlight: "Фонарь"
     ]
 
     static let kk: [LocalKey: String] = [
@@ -804,6 +838,12 @@ extension LocalizationTable {
         .tools_light_hint: "Жарық па, қараңғы ма — айтам",
         .tools_face: "Бет",
         .tools_face_hint: "Қарсы алдыңыздағы адамды сипаттаймын",
+        .tools_sign: "Жол белгісі",
+        .tools_sign_hint: "Көрсеткіш немесе жол белгісін оқимын",
+        .tools_document: "Құжат",
+        .tools_document_hint: "Қысқаша түсіндіремін",
+        .tools_finder: "Затты табу",
+        .tools_finder_hint: "Кілт, телефон, басқасын іздеймін",
         .tools_time: "Уақыт",
         .tools_battery: "Батарея",
         .tools_capturing: "Сурет түсіріп жатырмын...",
@@ -957,7 +997,17 @@ extension LocalizationTable {
         .common_retry: "Қайталау",
         .common_loading: "Жүктелуде…",
         .common_empty: "Әзірге бос",
-        .common_offline_label: "Желі жоқ"
+        .common_offline_label: "Желі жоқ",
+
+        .locator_intro: "Локатор қосылды. Алдыңызда бірдеңе болса айтамын.",
+        .locator_status_clear: "Жол бос. Алға жүріңіз.",
+        .locator_status_turn_left: "Оң жақта кедергі. Солға бұрылыңыз.",
+        .locator_status_turn_right: "Сол жақта кедергі. Оңға бұрылыңыз.",
+        .locator_status_stop_wall: "Тоқтаңыз! Алдыңызда қабырға.",
+        .locator_status_dark: "Өте қараңғы. Шамды қосыңыз.",
+        .locator_heartbeat: "Жол бос.",
+
+        .acc_flashlight: "Шам"
     ]
 
     static let en: [LocalKey: String] = [
@@ -1107,6 +1157,12 @@ extension LocalizationTable {
         .tools_light_hint: "I tell you if it's bright or dark",
         .tools_face: "Face",
         .tools_face_hint: "I describe the person in front of you",
+        .tools_sign: "Road sign",
+        .tools_sign_hint: "Read a road sign or wall plaque",
+        .tools_document: "Document",
+        .tools_document_hint: "Summarise a paper or receipt",
+        .tools_finder: "Find item",
+        .tools_finder_hint: "Look for keys, phone, remote — anything",
         .tools_time: "Time",
         .tools_battery: "Battery",
         .tools_capturing: "Taking a snapshot...",
@@ -1260,6 +1316,16 @@ extension LocalizationTable {
         .common_retry: "Retry",
         .common_loading: "Loading…",
         .common_empty: "Nothing here yet",
-        .common_offline_label: "Offline"
+        .common_offline_label: "Offline",
+
+        .locator_intro: "Locator is on. I'll call out anything ahead.",
+        .locator_status_clear: "Path is clear. Walk on.",
+        .locator_status_turn_left: "Obstacle on the right. Move to the left.",
+        .locator_status_turn_right: "Obstacle on the left. Move to the right.",
+        .locator_status_stop_wall: "Stop. Wall ahead.",
+        .locator_status_dark: "Too dark. Turn the flashlight on.",
+        .locator_heartbeat: "Path clear.",
+
+        .acc_flashlight: "Flashlight"
     ]
 }
