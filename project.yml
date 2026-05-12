@@ -22,8 +22,8 @@ settings:
     CODE_SIGNING_REQUIRED: NO
     CODE_SIGNING_ALLOWED: NO
     PROVISIONING_PROFILE_SPECIFIER: ""
-    MARKETING_VERSION: "1.4.0"
-    CURRENT_PROJECT_VERSION: "5"
+    MARKETING_VERSION: "1.4.1"
+    CURRENT_PROJECT_VERSION: "6"
 
 targets:
   WINXPierce:
@@ -48,7 +48,6 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
         INFOPLIST_KEY_UIRequiresFullScreen: NO
         INFOPLIST_KEY_UIStatusBarStyle: UIStatusBarStyleDefault
-        INFOPLIST_KEY_UIUserInterfaceStyle: ""
         INFOPLIST_KEY_CFBundleDisplayName: "WINX × Pierce"
         INFOPLIST_KEY_CFBundleLocalizations: "ru kk en"
         INFOPLIST_KEY_NSCameraUsageDescription: "WINX × Pierce использует камеру для распознавания объектов, текста, дорожных ситуаций и описания окружения."
@@ -62,16 +61,11 @@ targets:
         INFOPLIST_KEY_NSPhotoLibraryUsageDescription: "Доступ к галерее нужен для распознавания текста и объектов на сохранённых фото."
         INFOPLIST_KEY_NSMotionUsageDescription: "Датчики движения помогают определять опасные движения и улучшать описание сцены."
         INFOPLIST_KEY_NSFaceIDUsageDescription: "Face ID используется для быстрой блокировки экстренного режима."
-        INFOPLIST_KEY_NSAppTransportSecurity: ""
-        INFOPLIST_KEY_NSUserActivityTypes: ""
         INFOPLIST_KEY_LSApplicationQueriesSchemes: "whatsapp telegram tg sms tel mailto maps"
-        INFOPLIST_KEY_UIBackgroundModes: "audio location voip"
-        INFOPLIST_KEY_UIRequiredDeviceCapabilities: "armv7"
+        INFOPLIST_KEY_UIBackgroundModes: "audio location"
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
         INFOPLIST_KEY_INSendMessageIntentEnabled: YES
-        INFOPLIST_KEY_NSSupportsLiveActivities: YES
-        INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates: YES
         INFOPLIST_KEY_UIFileSharingEnabled: YES
         INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace: YES
         ENABLE_PREVIEWS: YES
@@ -100,8 +94,6 @@ targets:
         UIBackgroundModes:
           - audio
           - location
-          - voip
-        NSSupportsLiveActivities: true
         UIApplicationSupportsIndirectInputEvents: true
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait

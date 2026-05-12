@@ -116,9 +116,9 @@ struct HelloSplashView: View {
 
         // Speak the device-language hello aloud once (only on the very first launch)
         try? await Task.sleep(nanoseconds: 500_000_000)
-        if !hasSpoken && !settings.hasCompletedOnboarding {
+        if !hasSpoken && !settings.hasCompletedOnboarding,
+           let g = greetings.first {
             hasSpoken = true
-            let g = greetings.first!
             VoiceSynthesizer.shared.speak(g.0, language: g.1)
             HapticManager.shared.tap()
         }
