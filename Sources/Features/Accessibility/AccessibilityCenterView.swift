@@ -148,6 +148,12 @@ struct AccessibilityCenterView: View {
                 Toggle(loc.tr(.acc_voice_control), isOn: $settings.voiceControlEnabled)
                 Toggle(loc.tr(.acc_danger_haptics), isOn: $settings.dangerVibrations)
                 Toggle(loc.tr(.acc_haptics), isOn: $settings.hapticsEnabled)
+                VStack(alignment: .leading, spacing: 6) {
+                    Toggle(loc.tr(.acc_voice_guide), isOn: $settings.voiceGuideEnabled)
+                    Text(loc.tr(.acc_voice_guide_hint))
+                        .font(.system(size: 13))
+                        .foregroundStyle(.secondary)
+                }
             }
 
             // ── Language ──────────────────────────────────────────────────
@@ -180,6 +186,7 @@ struct AccessibilityCenterView: View {
         }
         .navigationTitle(Text(loc.tr(.tile_accessibility)))
         .onAppear { refreshVoices() }
+            .voiceGuide(.guide_accessibility)
     }
 
     // MARK: - Helpers

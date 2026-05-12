@@ -66,6 +66,7 @@ struct MagnifierView: View {
                 .padding()
             }
         }
+            .voiceGuide(.guide_magnifier)
     }
 }
 

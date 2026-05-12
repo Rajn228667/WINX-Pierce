@@ -152,5 +152,6 @@ struct SoundDetectorView: View {
             }
         }
         .onDisappear { engine.stop() }
+            .voiceGuide(.guide_sound_detect)
     }
 }

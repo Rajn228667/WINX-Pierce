@@ -93,5 +93,6 @@ struct OCRReaderView: View {
             }
             .padding(.horizontal).padding(.bottom)
         }
+            .voiceGuide(.guide_ocr)
     }
 }

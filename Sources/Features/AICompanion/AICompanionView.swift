@@ -97,6 +97,7 @@ struct AICompanionView: View {
         }
         .onAppear { vm.greet() }
         .onDisappear { vm.cancel() }
+            .voiceGuide(.guide_ai_companion)
     }
 
     private func actionPill(systemImage: String, label: String, action: @escaping () -> Void) -> some View {

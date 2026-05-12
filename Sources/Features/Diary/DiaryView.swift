@@ -93,6 +93,7 @@ struct DiaryView: View {
             .listStyle(.plain)
         }
         .navigationTitle("Дневник")
+            .voiceGuide(.guide_diary)
     }
 
     private func saveEntry() {

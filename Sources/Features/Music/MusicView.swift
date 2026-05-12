@@ -51,6 +51,7 @@ struct MusicView: View {
             Spacer()
         }
         .onAppear { vm.refresh() }
+            .voiceGuide(.guide_music)
     }
 
     private func bigButton(_ system: String, action: @escaping () -> Void) -> some View {

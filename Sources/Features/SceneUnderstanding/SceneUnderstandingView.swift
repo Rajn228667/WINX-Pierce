@@ -45,6 +45,7 @@ struct SceneUnderstandingView: View {
                 .padding()
             }
         }
+            .voiceGuide(.guide_scene)
     }
 }
 

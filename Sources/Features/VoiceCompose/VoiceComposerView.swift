@@ -164,5 +164,6 @@ struct VoiceComposerView: View {
         .sheet(isPresented: $presentingShare) {
             ActivityShareSheet(items: [text])
         }
+            .voiceGuide(.guide_voice_compose)
     }
 }

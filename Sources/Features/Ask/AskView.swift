@@ -78,6 +78,7 @@ struct AskView: View {
         .onChange(of: recognizer.transcript) { newValue in
             prompt = newValue
         }
+            .voiceGuide(.guide_ask)
     }
 
     private func ask() async {

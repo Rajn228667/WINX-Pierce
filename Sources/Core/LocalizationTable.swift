@@ -286,6 +286,52 @@ enum LocalKey: String, CaseIterable {
     case err_no_permission
     case err_network
     case err_ollama_offline
+
+    // Voice guide — spoken announcements when entering each screen.
+    // These are short, calming, in second person — exactly what a sighted
+    // companion would whisper next to you when you arrive.
+    case guide_home
+    case guide_ai_companion
+    case guide_scan
+    case guide_magnifier
+    case guide_ocr
+    case guide_scene
+    case guide_currency
+    case guide_listen
+    case guide_cards
+    case guide_ask
+    case guide_locator
+    case guide_walking
+    case guide_navigation
+    case guide_sos
+    case guide_health
+    case guide_learning
+    case guide_whatsapp
+    case guide_telegram
+    case guide_music
+    case guide_diary
+    case guide_smart_home
+    case guide_eye_comfort
+    case guide_sound_detect
+    case guide_voice_compose
+    case guide_tools
+    case guide_banks
+    case guide_accessibility
+    case guide_settings
+    case guide_back
+
+    // Settings — preference for the spoken guide
+    case acc_voice_guide
+    case acc_voice_guide_hint
+
+    // Generic UI strings re-used across many screens
+    case common_close
+    case common_done
+    case common_cancel
+    case common_retry
+    case common_loading
+    case common_empty
+    case common_offline_label
 }
 
 /// Embedded localisations. Translators only need to edit this one Swift file.
@@ -566,7 +612,49 @@ extension LocalizationTable {
 
         .lang_choose_title: "Выберите язык",
         .lang_choose_subtitle: "Эту настройку можно изменить позже",
-        .lang_continue: "Продолжить"
+        .lang_continue: "Продолжить",
+
+        // Voice guide — spoken when entering a screen.
+        .guide_home: "Главная. Большие плитки — это разделы. Нажмите, чтобы открыть.",
+        .guide_ai_companion: "Помощник Эдит. Нажмите и говорите — я слушаю.",
+        .guide_scan: "Сканер сцены. Наведите камеру на пространство, я расскажу, что вижу и предупрежу о препятствиях.",
+        .guide_magnifier: "Лупа. Камера приближает предметы. Слайдер увеличивает масштаб.",
+        .guide_ocr: "Распознавание текста. Сфотографируйте надпись — я прочту её вслух.",
+        .guide_scene: "Описание сцены. Сделаю снимок и расскажу, что на нём.",
+        .guide_currency: "Курсы валют. Свежие данные обновляются автоматически.",
+        .guide_listen: "Слух. Речь собеседника появится крупным шрифтом в реальном времени.",
+        .guide_cards: "Карты. Здесь ваши банковские и проездные карты.",
+        .guide_ask: "Спросить. Задайте короткий вопрос голосом или текстом — отвечу.",
+        .guide_locator: "Локатор. Компас, шаг-счётчик и сохранение текущей точки.",
+        .guide_walking: "Прогулка. Поведу вас голосом и предупрежу о препятствиях.",
+        .guide_navigation: "Навигация. Скажу куда идти, я веду маршрут голосом.",
+        .guide_sos: "Экстренный режим. Удерживайте кнопку, я отправлю сигнал близкому.",
+        .guide_health: "Здоровье. Пульс, шаги, лекарства и напоминания.",
+        .guide_learning: "Учёба. Короткие уроки с голосовым сопровождением.",
+        .guide_whatsapp: "WhatsApp. Быстро отправлю сообщение или позвоню.",
+        .guide_telegram: "Telegram. Быстро отправлю сообщение или позвоню.",
+        .guide_music: "Музыка. Включу любимые композиции.",
+        .guide_diary: "Дневник. Запишите день голосом, я сохраню.",
+        .guide_smart_home: "Умный дом. Управляйте светом, сценами и устройствами.",
+        .guide_eye_comfort: "Бережём глаза. Слайдеры яркости и тёплого света.",
+        .guide_sound_detect: "Звуки. Я слушаю окружение и предупрежу о тревоге, звонке в дверь, плаче ребёнка.",
+        .guide_voice_compose: "Мой голос. Напишите текст — произнесу красивым голосом.",
+        .guide_tools: "Инструменты. Цвет, купюра, лицо, свет, время и батарея — всё одним нажатием.",
+        .guide_banks: "Банки. Откройте Kaspi или Halyk одним нажатием.",
+        .guide_accessibility: "Доступность. Размер текста, цветокоррекция, голос ассистента.",
+        .guide_settings: "Настройки приложения.",
+        .guide_back: "Назад на главную.",
+
+        .acc_voice_guide: "Голосовой гид",
+        .acc_voice_guide_hint: "Помощник произнесёт короткую подсказку при открытии каждого экрана.",
+
+        .common_close: "Закрыть",
+        .common_done: "Готово",
+        .common_cancel: "Отмена",
+        .common_retry: "Повторить",
+        .common_loading: "Загрузка…",
+        .common_empty: "Здесь пока пусто",
+        .common_offline_label: "Нет сети"
     ]
 
     static let kk: [LocalKey: String] = [
@@ -827,7 +915,49 @@ extension LocalizationTable {
 
         .lang_choose_title: "Тілді таңдаңыз",
         .lang_choose_subtitle: "Бұл параметрді кейін өзгертуге болады",
-        .lang_continue: "Жалғастыру"
+        .lang_continue: "Жалғастыру",
+
+        // Voice guide — spoken when entering a screen.
+        .guide_home: "Басты экран. Үлкен тақташалар — бөлімдер. Ашу үшін басыңыз.",
+        .guide_ai_companion: "Көмекші Эдит. Басып, сөйлеңіз — мен тыңдаймын.",
+        .guide_scan: "Сахна сканері. Камераны кеңістікке бағыттаңыз — мен не көріп тұрғанымды айтамын.",
+        .guide_magnifier: "Лупа. Камера заттарды жақындатады. Слайдер масштабты үлкейтеді.",
+        .guide_ocr: "Мәтінді тану. Жазуды суретке түсіріңіз — мен оны дауыстап оқимын.",
+        .guide_scene: "Сахна сипаттамасы. Сурет түсіремін де, не бар екенін айтамын.",
+        .guide_currency: "Валюта бағамдары. Деректер автоматты түрде жаңарады.",
+        .guide_listen: "Есту. Сұхбаттасушының сөзі ірі әріппен нақты уақытта пайда болады.",
+        .guide_cards: "Карталар. Сіздің банк және жол карталарыңыз осында.",
+        .guide_ask: "Сұрау. Дауыспен немесе мәтінмен сұрақ қойыңыз — жауап беремін.",
+        .guide_locator: "Локатор. Компас, қадам санағыш, орынды сақтау.",
+        .guide_walking: "Серуен. Сізді дауыспен бағыттаймын және кедергі туралы ескертемін.",
+        .guide_navigation: "Бағдарлау. Бағытты дауыспен айтып отырамын.",
+        .guide_sos: "Шұғыл режим. Түймені ұстап тұрыңыз — жақыныңызға сигнал жіберемін.",
+        .guide_health: "Денсаулық. Пульс, қадамдар, дәрі-дәрмек және еске салғыштар.",
+        .guide_learning: "Оқу. Дауыспен жүргізілетін қысқа сабақтар.",
+        .guide_whatsapp: "WhatsApp. Тез хабарлама жіберемін немесе қоңырау шаламын.",
+        .guide_telegram: "Telegram. Тез хабарлама жіберемін немесе қоңырау шаламын.",
+        .guide_music: "Музыка. Сүйікті әуендеріңізді қосамын.",
+        .guide_diary: "Күнделік. Күнді дауыспен жазыңыз — сақтаймын.",
+        .guide_smart_home: "Ақылды үй. Жарық, сценарий және құрылғыларды басқарыңыз.",
+        .guide_eye_comfort: "Көзге қамқорлық. Жарықтық пен жылы жарық слайдерлері.",
+        .guide_sound_detect: "Дыбыстар. Айналаны тыңдап, дабыл, есік қоңырауы, бөбектің жылауы туралы ескертемін.",
+        .guide_voice_compose: "Менің даусым. Мәтін жазыңыз — әдемі дауыспен айтып беремін.",
+        .guide_tools: "Құралдар. Түс, банкнот, бет, жарық, уақыт пен батарея — бәрі бір түймеде.",
+        .guide_banks: "Банктер. Kaspi немесе Halyk-ты бір түймеден ашыңыз.",
+        .guide_accessibility: "Қолжетімділік. Мәтін өлшемі, түс түзетуі, көмекші даусы.",
+        .guide_settings: "Қолданба параметрлері.",
+        .guide_back: "Басты экранға қайту.",
+
+        .acc_voice_guide: "Дауыстық гид",
+        .acc_voice_guide_hint: "Әр экранды ашқанда көмекші қысқа кеңес айтады.",
+
+        .common_close: "Жабу",
+        .common_done: "Дайын",
+        .common_cancel: "Болдырмау",
+        .common_retry: "Қайталау",
+        .common_loading: "Жүктелуде…",
+        .common_empty: "Әзірге бос",
+        .common_offline_label: "Желі жоқ"
     ]
 
     static let en: [LocalKey: String] = [
@@ -1088,6 +1218,48 @@ extension LocalizationTable {
 
         .lang_choose_title: "Choose your language",
         .lang_choose_subtitle: "You can change this later in Settings",
-        .lang_continue: "Continue"
+        .lang_continue: "Continue",
+
+        // Voice guide — spoken when entering a screen.
+        .guide_home: "Home. Each large tile is a section. Tap to open.",
+        .guide_ai_companion: "Companion Edith. Tap and speak — I'm listening.",
+        .guide_scan: "Scene scanner. Point the camera around — I'll describe what I see and warn about obstacles.",
+        .guide_magnifier: "Magnifier. The camera enlarges objects. Use the slider to zoom in.",
+        .guide_ocr: "Text recognition. Take a photo of any text — I'll read it aloud.",
+        .guide_scene: "Scene description. I'll snap a picture and tell you what's in it.",
+        .guide_currency: "Currency rates. Live data refreshes automatically.",
+        .guide_listen: "Listen. Your conversation partner's speech appears as large text in real time.",
+        .guide_cards: "Cards. Your bank cards and travel passes live here.",
+        .guide_ask: "Ask. Ask a quick question by voice or text — I'll answer.",
+        .guide_locator: "Locator. Compass, step counter, save your current point.",
+        .guide_walking: "Walk mode. I'll guide you with voice and warn about obstacles.",
+        .guide_navigation: "Navigation. I'll speak directions along your route.",
+        .guide_sos: "Emergency. Hold the button — I'll alert your contact.",
+        .guide_health: "Health. Heart rate, steps, medications and reminders.",
+        .guide_learning: "Learning. Short voice-guided lessons.",
+        .guide_whatsapp: "WhatsApp. Send a message or place a call quickly.",
+        .guide_telegram: "Telegram. Send a message or place a call quickly.",
+        .guide_music: "Music. Play your favourite tracks.",
+        .guide_diary: "Diary. Record your day by voice — I'll save it.",
+        .guide_smart_home: "Smart home. Control lights, scenes and devices.",
+        .guide_eye_comfort: "Eye care. Brightness and warm-light sliders.",
+        .guide_sound_detect: "Sounds. I'm listening to the environment and will alert you for alarms, doorbells or a crying baby.",
+        .guide_voice_compose: "My voice. Type any text — I'll speak it in a beautiful voice.",
+        .guide_tools: "Tools. Colour, banknote, face, light, time and battery — all in one tap.",
+        .guide_banks: "Banks. Open Kaspi or Halyk in a single tap.",
+        .guide_accessibility: "Accessibility. Text size, colour correction, assistant voice.",
+        .guide_settings: "App settings.",
+        .guide_back: "Back to home.",
+
+        .acc_voice_guide: "Voice guide",
+        .acc_voice_guide_hint: "The assistant speaks a brief hint when you open each screen.",
+
+        .common_close: "Close",
+        .common_done: "Done",
+        .common_cancel: "Cancel",
+        .common_retry: "Retry",
+        .common_loading: "Loading…",
+        .common_empty: "Nothing here yet",
+        .common_offline_label: "Offline"
     ]
 }

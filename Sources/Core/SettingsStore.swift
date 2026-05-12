@@ -26,6 +26,7 @@ final class SettingsStore: ObservableObject {
         static let preferredCompanionModel = "winx.preferredCompanionModel"
         static let voiceGender = "winx.voiceGender"
         static let voiceIdentifier = "winx.voiceIdentifier"
+        static let voiceGuide = "winx.voiceGuideEnabled"
     }
 
     private let defaults = UserDefaults.standard
@@ -107,6 +108,12 @@ final class SettingsStore: ObservableObject {
         didSet { defaults.set(voiceIdentifier, forKey: Keys.voiceIdentifier) }
     }
 
+    /// When `true`, every screen speaks a short hint on appear. Defaults `true`
+    /// so first-time users immediately discover the voice guide.
+    @Published var voiceGuideEnabled: Bool {
+        didSet { defaults.set(voiceGuideEnabled, forKey: Keys.voiceGuide) }
+    }
+
     // MARK: - Init
 
     private init() {
@@ -127,6 +134,7 @@ final class SettingsStore: ObservableObject {
         self.preferredCompanionModel = defaults.string(forKey: Keys.preferredCompanionModel) ?? Config.chatModel
         self.voiceGenderRaw = defaults.string(forKey: Keys.voiceGender) ?? VoiceGender.female.rawValue
         self.voiceIdentifier = defaults.string(forKey: Keys.voiceIdentifier) ?? ""
+        self.voiceGuideEnabled = defaults.object(forKey: Keys.voiceGuide) as? Bool ?? true
     }
 
     var voiceGender: VoiceGender {
@@ -170,7 +178,7 @@ final class SettingsStore: ObservableObject {
             Keys.colorScheme, Keys.colorblindMode, Keys.blueLightFilter, Keys.language,
             Keys.voiceRate, Keys.voicePitch, Keys.voiceVolume, Keys.hapticsEnabled,
             Keys.voiceControlEnabled, Keys.dangerVibrations, Keys.preferredCompanionModel,
-            Keys.voiceGender, Keys.voiceIdentifier
+            Keys.voiceGender, Keys.voiceIdentifier, Keys.voiceGuide
         ] {
             defaults.removeObject(forKey: key)
         }

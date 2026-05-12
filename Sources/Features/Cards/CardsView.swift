@@ -44,5 +44,6 @@ struct CardsView: View {
             .padding(.vertical)
         }
         .navigationTitle("Карточки фраз")
+            .voiceGuide(.guide_cards)
     }
 }

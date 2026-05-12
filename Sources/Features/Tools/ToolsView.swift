@@ -164,6 +164,7 @@ struct ToolsView: View {
             camera.stop()
             VoiceSynthesizer.shared.stop()
         }
+            .voiceGuide(.guide_tools)
     }
 
     private func instantToolButton(icon: String, title: String, color: Color, action: @escaping () -> Void) -> some View {

@@ -95,6 +95,7 @@ struct BanksView: View {
         .onAppear {
             VoiceSynthesizer.shared.speak(loc.tr(.banks_intro))
         }
+            .voiceGuide(.guide_banks)
     }
 
     private func openBank(_ bank: Bank) {

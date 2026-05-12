@@ -37,6 +37,7 @@ struct LearningView: View {
             .padding()
         }
         .navigationTitle("Уроки голосом")
+            .voiceGuide(.guide_learning)
     }
 }
 

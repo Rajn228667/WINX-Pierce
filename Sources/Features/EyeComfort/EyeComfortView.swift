@@ -33,5 +33,6 @@ struct EyeComfortView: View {
         .onAppear {
             engine.applySaved()
         }
+            .voiceGuide(.guide_eye_comfort)
     }
 }
