@@ -122,9 +122,9 @@ final class AIRouter: AIClient {
 
         let clients: [AIClient] = {
             switch preferred {
-            case .gemini: return [GeminiClient.shared, GrokClient.shared, OllamaClient.shared]
-            case .grok:   return [GrokClient.shared, GeminiClient.shared, OllamaClient.shared]
-            case .ollama: return [OllamaClient.shared, GeminiClient.shared, GrokClient.shared]
+            case .gemini: return [GeminiClient.shared, GroqClient.shared, OllamaClient.shared]
+            case .grok:   return [GroqClient.shared, GeminiClient.shared, OllamaClient.shared]
+            case .ollama: return [OllamaClient.shared, GeminiClient.shared, GroqClient.shared]
             }
         }()
         return clients.first(where: { $0.isReady }) ?? clients[0]

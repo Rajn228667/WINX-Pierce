@@ -193,7 +193,7 @@ private struct ConversationHistoryView: View {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 18).fill(msg.role == .user ? Theme.accentBlue.opacity(0.18) : Theme.card))
                         }
-                        .frame(maxWidth: .infinity, alignment: msg.role == "user" ? .trailing : .leading)
+                        .frame(maxWidth: .infinity, alignment: msg.role == .user ? .trailing : .leading)
                     }
                 }
                 .padding()
