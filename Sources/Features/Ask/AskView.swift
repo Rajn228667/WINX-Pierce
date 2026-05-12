@@ -85,18 +85,17 @@ struct AskView: View {
         loading = true
         defer { loading = false }
         do {
-            let reply = try await OllamaClient.shared.chat(
-                model: Config.fastModel,
+            let reply = try await AIRouter.shared.chat(
                 messages: [
-                    .init(role: "system", content: "Отвечай коротко, по делу, тёплым голосом, на том же языке, что и вопрос."),
-                    .init(role: "user", content: prompt)
+                    AIMessage(role: .system, content: "Отвечай коротко, по делу, тёплым голосом, на том же языке, что и вопрос."),
+                    AIMessage(role: .user, content: prompt)
                 ],
                 temperature: 0.5
             )
             answer = reply
             VoiceSynthesizer.shared.speak(reply)
         } catch {
-            answer = "Не удалось получить ответ. Проверьте туннель Ollama."
+            answer = "Не удалось получить ответ. Проверьте подключение нейросети в настройках."
             VoiceSynthesizer.shared.speak(answer)
         }
     }

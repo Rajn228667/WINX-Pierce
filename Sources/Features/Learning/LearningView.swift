@@ -78,11 +78,10 @@ struct LessonView: View {
         defer { loading = false }
         let prompt = "Объясни простым языком, тёплым голосом, тему «\(topic)» как урок для незрячего человека. Дай 3 коротких пункта по 1-2 предложения."
         do {
-            let reply = try await OllamaClient.shared.chat(
-                model: Config.chatModel,
+            let reply = try await AIRouter.shared.chat(
                 messages: [
-                    .init(role: "system", content: Config.companionSystemPrompt),
-                    .init(role: "user", content: prompt)
+                    AIMessage(role: .system, content: Config.companionSystemPrompt),
+                    AIMessage(role: .user, content: prompt)
                 ],
                 temperature: 0.5
             )

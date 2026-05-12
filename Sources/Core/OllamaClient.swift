@@ -3,11 +3,46 @@ import Foundation
 /// Ollama HTTP client. Talks to the user's self-hosted Ollama server, exposed via
 /// a Cloudflare tunnel. Supports plain chat, streaming chat (token-by-token), and
 /// multimodal chat (image + prompt) for the Scene Description feature.
-final class OllamaClient {
+final class OllamaClient: AIClient {
 
     static let shared = OllamaClient()
 
     private init() {}
+
+    // MARK: - AIClient conformance
+
+    let displayName = "Локальная Ollama"
+    var isReady: Bool { hasURL }
+
+    func chat(messages: [AIMessage], temperature: Double = 0.6) async throws -> String {
+        let wire = messages.map(Self.toOllama)
+        let usesVision = messages.contains { $0.imageBase64 != nil }
+        return try await chat(model: usesVision ? Config.visionModel : Config.chatModel,
+                              messages: wire,
+                              temperature: temperature)
+    }
+
+    func streamChat(messages: [AIMessage], temperature: Double = 0.6) -> AsyncThrowingStream<String, Error> {
+        let wire = messages.map(Self.toOllama)
+        return streamChat(model: Config.chatModel, messages: wire, temperature: temperature)
+    }
+
+    func describeImage(base64JPEG: String, prompt: String) async throws -> String {
+        try await describeImage(base64JPEG: base64JPEG, prompt: prompt, model: nil)
+    }
+
+    private static func toOllama(_ msg: AIMessage) -> Message {
+        let role: String = {
+            switch msg.role {
+            case .system: return "system"
+            case .user: return "user"
+            case .assistant: return "assistant"
+            }
+        }()
+        return Message(role: role,
+                       content: msg.content,
+                       images: msg.imageBase64.map { [$0] })
+    }
 
     enum OllamaError: LocalizedError {
         case noBaseURL
@@ -175,7 +210,9 @@ final class OllamaClient {
     }
 
     /// Multimodal: ask the vision model to describe an image (base64 JPEG).
-    func describeImage(base64JPEG: String, prompt: String, model: String? = nil) async throws -> String {
+    /// The `model` parameter is required (no defaults) to keep overload
+    /// resolution unambiguous with the AIClient-conformance method.
+    func describeImage(base64JPEG: String, prompt: String, model: String?) async throws -> String {
         let visionModel = model ?? Config.visionModel
         let userMsg = Message(role: "user", content: prompt, images: [base64JPEG])
         return try await chat(model: visionModel, messages: [userMsg], temperature: 0.4)

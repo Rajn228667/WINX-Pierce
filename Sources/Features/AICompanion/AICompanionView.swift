@@ -83,8 +83,8 @@ struct AICompanionView: View {
                 }
                 .padding(.bottom, 24)
 
-                if !OllamaClient.shared.hasURL {
-                    NoOllamaBanner()
+                if !AIRouter.shared.isReady {
+                    NoAIBanner()
                         .padding(.horizontal)
                         .padding(.bottom, 8)
                 }
@@ -116,7 +116,7 @@ struct AICompanionView: View {
     }
 }
 
-private struct NoOllamaBanner: View {
+private struct NoAIBanner: View {
     @EnvironmentObject private var loc: LocalizationManager
     @State private var showSheet = false
     var body: some View {
@@ -142,7 +142,7 @@ private struct NoOllamaBanner: View {
         }
         .buttonStyle(.plain)
         .sheet(isPresented: $showSheet) {
-            NavigationStack { OllamaURLEditView() }
+            NavigationStack { AIProviderSettingsView() }
         }
     }
 }
@@ -164,7 +164,7 @@ struct OllamaURLEditView: View {
                     KeychainStore.ollamaBaseURL = url.trimmingCharacters(in: .whitespaces)
                     Task {
                         let ok = await OllamaClient.shared.ping()
-                        status = ok ? "Связь установлена" : "Ollama не отвечает"
+                        status = ok ? "Связь установлена" : "Сервер не отвечает"
                         if ok { dismiss() }
                     }
                 }
@@ -181,19 +181,19 @@ struct OllamaURLEditView: View {
 }
 
 private struct ConversationHistoryView: View {
-    let messages: [OllamaClient.Message]
+    let messages: [AIMessage]
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
                     ForEach(Array(messages.enumerated()), id: \.offset) { _, msg in
-                        VStack(alignment: msg.role == "user" ? .trailing : .leading, spacing: 4) {
-                            Text(msg.role == "user" ? "Вы" : "Эдит").font(.caption).foregroundStyle(.secondary)
+                        VStack(alignment: msg.role == .user ? .trailing : .leading, spacing: 4) {
+                            Text(msg.role == .user ? "Вы" : "Эдит").font(.caption).foregroundStyle(.secondary)
                             Text(msg.content)
                                 .padding()
-                                .background(RoundedRectangle(cornerRadius: 18).fill(msg.role == "user" ? Theme.accentBlue.opacity(0.18) : Theme.card))
+                                .background(RoundedRectangle(cornerRadius: 18).fill(msg.role == .user ? Theme.accentBlue.opacity(0.18) : Theme.card))
                         }
-                        .frame(maxWidth: .infinity, alignment: msg.role == "user" ? .trailing : .leading)
+                        .frame(maxWidth: .infinity, alignment: msg.role == .user ? .trailing : .leading)
                     }
                 }
                 .padding()

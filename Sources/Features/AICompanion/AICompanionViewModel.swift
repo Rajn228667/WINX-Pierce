@@ -11,7 +11,7 @@ final class AICompanionViewModel: ObservableObject {
     @Published var partialUserText: String = ""
     @Published var lastAssistantReply: String = ""
     @Published var amplitude: Double = 0.0
-    @Published private(set) var messages: [OllamaClient.Message] = []
+    @Published private(set) var messages: [AIMessage] = []
 
     private let recognizer = SpeechRecognizer()
     private let voice = VoiceSynthesizer.shared
@@ -21,7 +21,7 @@ final class AICompanionViewModel: ObservableObject {
 
     init() {
         // Seed with the system prompt — uses the user's currently selected language.
-        messages.append(OllamaClient.Message(role: "system", content: Self.systemPromptForCurrentLanguage()))
+        messages.append(AIMessage(role: .system, content: Self.systemPromptForCurrentLanguage()))
 
         // Refresh the system prompt whenever the user switches language.
         LocalizationManager.shared.$currentLanguage
@@ -99,30 +99,28 @@ final class AICompanionViewModel: ObservableObject {
 
     func regenerate() async {
         // Resend the last user message.
-        if let last = messages.last(where: { $0.role == "user" }) {
+        if let last = messages.last(where: { $0.role == .user }) {
             // Remove the last assistant turn (if any) to keep the chat tidy.
-            if messages.last?.role == "assistant" { messages.removeLast() }
+            if messages.last?.role == .assistant { messages.removeLast() }
             await streamReply(after: last)
         }
     }
 
     private func send(userText: String) {
-        let msg = OllamaClient.Message(role: "user", content: userText)
+        let msg = AIMessage(role: .user, content: userText)
         messages.append(msg)
         partialUserText = ""
         streamingTask = Task { await streamReply(after: msg) }
     }
 
-    private func streamReply(after userMessage: OllamaClient.Message) async {
+    private func streamReply(after userMessage: AIMessage) async {
         isThinking = true
         lastAssistantReply = ""
 
-        let model = SettingsStore.shared.preferredCompanionModel
         var buffer: String = ""
         var spokenChunkBoundary: Int = 0
         do {
-            let stream = OllamaClient.shared.streamChat(
-                model: model,
+            let stream = AIRouter.shared.streamChat(
                 messages: messages,
                 temperature: 0.55
             )
@@ -142,14 +140,16 @@ final class AICompanionViewModel: ObservableObject {
             let tail = String(buffer.suffix(buffer.count - spokenChunkBoundary)).trimmingCharacters(in: .whitespacesAndNewlines)
             if !tail.isEmpty { voice.speak(tail) }
 
-            messages.append(OllamaClient.Message(role: "assistant", content: buffer))
+            messages.append(AIMessage(role: .assistant, content: buffer))
         } catch {
             isThinking = false
             let msg: String
-            if let oerr = error as? OllamaClient.OllamaError {
+            if let aerr = error as? AIError {
+                msg = aerr.errorDescription ?? "Ошибка нейросети"
+            } else if let oerr = error as? OllamaClient.OllamaError {
                 msg = oerr.errorDescription ?? "Ошибка нейросети"
             } else {
-                msg = "Не удалось получить ответ. Проверьте туннель."
+                msg = "Не удалось получить ответ. Проверьте настройки AI."
             }
             lastAssistantReply = msg
             voice.speak(msg)
@@ -180,10 +180,10 @@ final class AICompanionViewModel: ObservableObject {
 
     private func refreshSystemPrompt() {
         let newPrompt = Self.systemPromptForCurrentLanguage()
-        if let idx = messages.firstIndex(where: { $0.role == "system" }) {
-            messages[idx] = OllamaClient.Message(role: "system", content: newPrompt)
+        if let idx = messages.firstIndex(where: { $0.role == .system }) {
+            messages[idx] = AIMessage(role: .system, content: newPrompt)
         } else {
-            messages.insert(OllamaClient.Message(role: "system", content: newPrompt), at: 0)
+            messages.insert(AIMessage(role: .system, content: newPrompt), at: 0)
         }
     }
 

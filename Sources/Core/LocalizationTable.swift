@@ -26,6 +26,20 @@ enum LocalKey: String, CaseIterable {
     case onb_ollama_placeholder
     case onb_ollama_test
     case onb_ollama_skip
+    case onb_ai_title
+    case onb_ai_body
+    case ai_settings_title
+    case ai_settings_picker
+    case ai_settings_active
+    case ai_settings_save_test
+    case ai_settings_testing
+    case ai_settings_ok
+    case ai_settings_no_response
+    case ai_settings_connected
+    case ai_settings_footnote
+    case ai_settings_get_gemini
+    case ai_settings_get_groq
+    case ai_settings_get_ollama
     case onb_continue
     case onb_finish
 
@@ -392,6 +406,20 @@ extension LocalizationTable {
         .onb_ollama_placeholder: "https://....trycloudflare.com",
         .onb_ollama_test: "Проверить связь",
         .onb_ollama_skip: "Пропустить",
+        .onb_ai_title: "Подключение нейросети",
+        .onb_ai_body: "Выберите провайдера и вставьте API-ключ. Gemini и Groq работают без туннеля. Остальные функции работают и без AI.",
+        .ai_settings_title: "Настройки нейросети",
+        .ai_settings_picker: "Активный провайдер",
+        .ai_settings_active: "активный",
+        .ai_settings_save_test: "Сохранить и проверить",
+        .ai_settings_testing: "Проверяю…",
+        .ai_settings_ok: "Связь есть",
+        .ai_settings_no_response: "Сервер не отвечает",
+        .ai_settings_connected: "Нейросеть подключена.",
+        .ai_settings_footnote: "Ключи хранятся в Keychain вашего iPhone и никуда не отправляются.",
+        .ai_settings_get_gemini: "Получить ключ Gemini",
+        .ai_settings_get_groq: "Получить ключ Groq",
+        .ai_settings_get_ollama: "Установить Ollama",
         .onb_continue: "Продолжить",
         .onb_finish: "Готово",
 
@@ -711,6 +739,20 @@ extension LocalizationTable {
         .onb_ollama_placeholder: "https://....trycloudflare.com",
         .onb_ollama_test: "Байланысты тексеру",
         .onb_ollama_skip: "Өткізіп жіберу",
+        .onb_ai_title: "Нейрожүйені қосу",
+        .onb_ai_body: "Провайдерді таңдаңыз және API-кілтті енгізіңіз. Gemini және Groq туннельсіз жұмыс істейді.",
+        .ai_settings_title: "Нейрожүйе баптаулары",
+        .ai_settings_picker: "Белсенді провайдер",
+        .ai_settings_active: "белсенді",
+        .ai_settings_save_test: "Сақтау және тексеру",
+        .ai_settings_testing: "Тексерілуде…",
+        .ai_settings_ok: "Байланыс бар",
+        .ai_settings_no_response: "Сервер жауап бермейді",
+        .ai_settings_connected: "Нейрожүйе қосылды.",
+        .ai_settings_footnote: "Кілттер iPhone Keychain-інде сақталады және ешқайда жіберілмейді.",
+        .ai_settings_get_gemini: "Gemini кілтін алу",
+        .ai_settings_get_groq: "Groq кілтін алу",
+        .ai_settings_get_ollama: "Ollama орнату",
         .onb_continue: "Жалғастыру",
         .onb_finish: "Дайын",
 
@@ -1030,6 +1072,20 @@ extension LocalizationTable {
         .onb_ollama_placeholder: "https://....trycloudflare.com",
         .onb_ollama_test: "Test connection",
         .onb_ollama_skip: "Skip",
+        .onb_ai_title: "Connect your AI",
+        .onb_ai_body: "Pick a provider and paste an API key. Gemini and Groq run without any tunnel. Everything else works offline.",
+        .ai_settings_title: "AI settings",
+        .ai_settings_picker: "Active provider",
+        .ai_settings_active: "active",
+        .ai_settings_save_test: "Save & test",
+        .ai_settings_testing: "Testing…",
+        .ai_settings_ok: "Connected",
+        .ai_settings_no_response: "Server not responding",
+        .ai_settings_connected: "AI connected.",
+        .ai_settings_footnote: "Keys are stored in your iPhone Keychain and never leave the device.",
+        .ai_settings_get_gemini: "Get a Gemini key",
+        .ai_settings_get_groq: "Get a Groq key",
+        .ai_settings_get_ollama: "Install Ollama",
         .onb_continue: "Continue",
         .onb_finish: "Done",
 

@@ -269,9 +269,9 @@ struct HealthView: View {
     private func askAboutSymptoms() async {
         let prompt = "Я расскажу тебе про мои симптомы, а ты дай короткие, спокойные советы и напомни, когда нужно вызвать врача."
         do {
-            let reply = try await OllamaClient.shared.chat(
-                model: Config.fastModel,
-                messages: [.init(role: "user", content: prompt)]
+            let reply = try await AIRouter.shared.chat(
+                messages: [AIMessage(role: .user, content: prompt)],
+                temperature: 0.6
             )
             VoiceSynthesizer.shared.speak(reply)
         } catch {
