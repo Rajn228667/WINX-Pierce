@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), monospace;
+
+  --color-background: #0b0d10;
+  --color-foreground: #f2f4f7;
+  --color-card: #14171c;
+  --color-card-foreground: #f2f4f7;
+  --color-muted: #1c2027;
+  --color-muted-foreground: #98a1ae;
+  --color-primary: #e2231a;
+  --color-primary-foreground: #ffffff;
+  --color-accent: #ff4d45;
+  --color-accent-foreground: #ffffff;
+  --color-border: #262b33;
+  --color-input: #1c2027;
+  --color-ring: #e2231a;
+  --color-success: #22c55e;
+
+  --radius: 0.75rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-foreground);
+}
+
+/* uiverse-inspired animated button */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.btn-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.25) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+.btn-glow:hover::before {
+  transform: translateX(100%);
+}
+.btn-glow:hover {
+  box-shadow: 0 0 24px rgba(226, 35, 26, 0.45);
+  transform: translateY(-2px);
+}
+
+.btn-border-anim {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+.btn-border-anim::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 1.5px;
+  background: var(--color-card);
+  border-radius: inherit;
+}
+.btn-border-anim::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  left: 50%;
+  top: 50%;
+  width: 220%;
+  height: 220%;
+  background: conic-gradient(from 0deg, transparent 0%, var(--color-primary) 20%, transparent 40%);
+  transform: translate(-50%, -50%);
+  animation: border-spin 3s linear infinite;
+}
+@keyframes border-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* marquee for brand strip */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* subtle float */
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-float {
+  animation: float-soft 5s ease-in-out infinite;
+}
+
+/* skeleton shimmer */
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--color-muted) 25%, var(--color-border) 50%, var(--color-muted) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
