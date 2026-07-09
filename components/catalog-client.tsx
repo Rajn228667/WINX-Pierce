@@ -7,9 +7,21 @@ import { products, categories, type Category } from '@/lib/products'
 import ProductCard from '@/components/product-card'
 import { useT } from '@/lib/use-t'
 
-type SortKey = 'priceAsc' | 'priceDesc' | 'name'
+type SortKey = 'featured' | 'priceAsc' | 'priceDesc' | 'name'
 
 const PAGE_SIZE = 24
+
+const categoryOrder: Record<string, number> = {
+  cameras: 0,
+  recorders: 1,
+  intercoms: 2,
+  alarm: 3,
+  access: 4,
+  network: 5,
+  auto: 6,
+  audio: 7,
+  accessories: 8,
+}
 
 export default function CatalogClient() {
   const t = useT()
@@ -24,7 +36,7 @@ export default function CatalogClient() {
   const [category, setCategory] = useState<Category | 'all'>(initialCategory ?? 'all')
   const [brand, setBrand] = useState<string>(initialBrand ?? 'all')
   const [query, setQuery] = useState(initialQuery)
-  const [sort, setSort] = useState<SortKey>('name')
+  const [sort, setSort] = useState<SortKey>('featured')
   const [visible, setVisible] = useState(PAGE_SIZE)
 
   // Sync state from URL when params change (e.g. header search / footer links)
@@ -56,7 +68,12 @@ export default function CatalogClient() {
     const sorted = [...list]
     if (sort === 'priceAsc') sorted.sort((a, b) => a.price - b.price)
     else if (sort === 'priceDesc') sorted.sort((a, b) => b.price - a.price)
-    else sorted.sort((a, b) => a.model.localeCompare(b.model))
+    else if (sort === 'name') sorted.sort((a, b) => a.model.localeCompare(b.model))
+    else
+      sorted.sort(
+        (a, b) =>
+          (categoryOrder[a.category] ?? 9) - (categoryOrder[b.category] ?? 9) || b.price - a.price,
+      )
     return sorted
   }, [category, brand, query, sort])
 
@@ -146,6 +163,7 @@ export default function CatalogClient() {
               onChange={(e) => setSort(e.target.value as SortKey)}
               className="rounded-lg border border-border bg-input px-3 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
             >
+              <option value="featured">{t('catalog.sort.featured')}</option>
               <option value="name">{t('catalog.sort.name')}</option>
               <option value="priceAsc">{t('catalog.sort.priceAsc')}</option>
               <option value="priceDesc">{t('catalog.sort.priceDesc')}</option>

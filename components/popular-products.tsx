@@ -9,13 +9,18 @@ import { useT } from '@/lib/use-t'
 
 export default function PopularProducts() {
   const t = useT()
-  // Spread picks across categories for variety
+  // Spread picks across categories for variety, flagship items first
+  const byPrice = (cat: string, n: number) =>
+    products
+      .filter((p) => p.category === cat)
+      .sort((a, b) => b.price - a.price)
+      .slice(0, n)
   const picks = [
-    ...products.filter((p) => p.category === 'cameras').slice(0, 3),
-    ...products.filter((p) => p.category === 'recorders').slice(0, 2),
-    ...products.filter((p) => p.category === 'intercoms').slice(0, 1),
-    ...products.filter((p) => p.category === 'network').slice(0, 1),
-    ...products.filter((p) => p.category === 'alarm').slice(0, 1),
+    ...byPrice('cameras', 3),
+    ...byPrice('recorders', 2),
+    ...byPrice('intercoms', 1),
+    ...byPrice('alarm', 1),
+    ...byPrice('auto', 1),
   ].slice(0, 8)
 
   return (

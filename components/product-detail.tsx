@@ -48,12 +48,12 @@ export default function ProductDetail({ product }: { product: Product }) {
       </Link>
 
       <div className="grid gap-10 md:grid-cols-2">
-        <div className="relative aspect-square overflow-hidden rounded-2xl border border-border bg-card">
+        <div className="relative aspect-square overflow-hidden rounded-2xl border border-border bg-white">
           <Image
-            src={categoryImages[product.category] || '/images/cat-accessories.png'}
+            src={product.image || categoryImages[product.category] || '/images/cat-accessories.png'}
             alt={product.model}
             fill
-            className="object-cover"
+            className="object-contain p-10"
             sizes="(max-width: 768px) 100vw, 50vw"
             priority
           />

@@ -19,23 +19,20 @@ export interface Product {
   price: number
   stock: string
   category: Category
+  image: string
 }
 
 export const products: Product[] = productsData as Product[]
 
+const brandCounts: Record<string, number> = {}
+for (const p of products) {
+  brandCounts[p.brand] = (brandCounts[p.brand] || 0) + 1
+}
+
 export const brands: { name: string; count: number; url: string }[] = [
-  { name: "Hikvision", count: 680, url: "https://www.hikvision.com" },
-  { name: "HiWatch", count: 142, url: "https://hi.watch" },
-  { name: "Ruijie | Reyee", count: 128, url: "https://www.ruijienetworks.com" },
-  { name: "Ezviz", count: 109, url: "https://www.ezviz.com" },
-  { name: "Volta", count: 87, url: "https://volta.kz" },
-  { name: "Huawei", count: 87, url: "https://e.huawei.com" },
-  { name: "HiLook", count: 36, url: "https://www.hilook.com" },
-  { name: "Сибирский Арсенал", count: 20, url: "https://www.arsenalnpo.ru" },
-  { name: "Uniview", count: 5, url: "https://www.uniview.com" },
-  { name: "Hikmicro", count: 4, url: "https://www.hikmicrotech.com" },
-  { name: "Seagate", count: 3, url: "https://www.seagate.com" },
-  { name: "Ruijie", count: 1, url: "https://www.ruijienetworks.com" },
+  { name: "Hikvision", count: brandCounts["Hikvision"] || 0, url: "https://www.hikvision.com" },
+  { name: "HiWatch", count: brandCounts["HiWatch"] || 0, url: "https://hi.watch" },
+  { name: "Ezviz", count: brandCounts["Ezviz"] || 0, url: "https://www.ezviz.com" },
 ]
 
 export const categories: { id: Category; icon: string }[] = [
