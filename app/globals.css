@@ -18,6 +18,11 @@
   --color-input: #1c2027;
   --color-ring: #e2231a;
   --color-success: #22c55e;
+  --color-success-foreground: #06130a;
+  --color-secondary: #1c2027;
+  --color-secondary-foreground: #f2f4f7;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
 
   --radius: 0.75rem;
 }
